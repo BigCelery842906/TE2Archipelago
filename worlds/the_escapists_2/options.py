@@ -50,6 +50,11 @@ class USSAnomaly(Toggle):
     """Enable U.S.S. Anomaly in the randomizer pool."""
     display_name = "U.S.S. Anomaly"
     default = 0
+    
+# class MultiplayerEscapes(Toggle):
+#     ""Enable Multiplayer Escapes""
+#     display_name = "Multiplayer Escapes"
+#     default = 0
 
 @dataclass
 class Escapists2Options(PerGameCommonOptions):
@@ -63,3 +68,4 @@ class Escapists2Options(PerGameCommonOptions):
     area_17: Area17
     air_force_con: AirForceCon
     uss_anomaly: USSAnomaly
+    # multiplayer_escapes: MultiplayerEscapes
