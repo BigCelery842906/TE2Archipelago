@@ -478,30 +478,45 @@ def create_regular_locations(world: TheEscapists2World) -> None:
 def create_events(world: TheEscapists2World) -> None:
     if world.options.center_perks:
         center_perks = world.get_region("Center Perks")
-        center_perks.add_event("Center Perks 2.0 Perimeter Escape", "Unique Escapes", location_type=TheEscapists2Location, item_type = items.TheEscapists2Item)
+        center_perks.add_event("CP2.0 PE", "Unique Escapes", location_type=TheEscapists2Location, item_type = items.TheEscapists2Item)
+        center_perks.add_event("CP2.0 MTC", "Unique Escapes", location_type=TheEscapists2Location, item_type = items.TheEscapists2Item)
     if world.options.rattlesnake_springs:
         rattlesnake_springs = world.get_region("Rattlesnake Springs")
+        rattlesnake_springs.add_event("RSS PE", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        rattlesnake_springs.add_event("RSS ZIU", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
 
     if world.options.kapow_camp:
         kapow_camp = world.get_region("KAPOW Camp")
+        kapow_camp.add_event("KAPOW PE", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        kapow_camp.add_event("KAPOW SM", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
 
     if world.options.hmp_offshore:
         hmp_offshore = world.get_region("HMP Offshore")
-
+        hmp_offshore.add_event("HMPOff PE", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        hmp_offshore.add_event("HMPOff SWD", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        hmp_offshore.add_event("HMPOff TT", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
     if world.options.fort_tundra:
         fort_tundra = world.get_region("Fort Tundra")
-
+        fort_tundra.add_event("FT PE", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        fort_tundra.add_event("FT RHHP", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
     if world.options.area_17:
         area_17 = world.get_region("Area 17")
+        area_17.add_event("A17 PE", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        area_17.add_event("A17 IOH", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
 
     if world.options.uss_anomaly:
         uss_anomaly = world.get_region("USS Anomaly")
-
+        uss_anomaly.add_event("USSA PE", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        uss_anomaly.add_event("USSA RFS", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
     if world.options.cougar_creek:
         cougar_creek = world.get_region("Cougar Creek")
-
+        cougar_creek.add_event("CCR MLP", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        cougar_creek.add_event("CCR HOY", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
     if world.options.hms_orca:
         hms_orca = world.get_region("HMS Orca")
-
+        hms_orca.add_event("HMSO SD", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        hms_orca.add_event("HMSO WG", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
     if world.options.air_force_con:
         air_force_con = world.get_region("Air Force Con")
+        air_force_con.add_event("AFC PTF", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        air_force_con.add_event("AFC PC", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
