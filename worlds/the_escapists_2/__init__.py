@@ -1,1 +1,1 @@
-from .world import TheEscapists2World as TheEscapists2World
+from .world import TheEscapists2World
