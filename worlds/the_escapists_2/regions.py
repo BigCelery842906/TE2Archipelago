@@ -1,5 +1,10 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
 from BaseClasses import Region
-from worlds.the_escapists_2.world import TheEscapists2World
+
+if TYPE_CHECKING:
+    from .world import TheEscapists2World
 
 
 # Regions should be each Prison

@@ -62,7 +62,7 @@ class USSAnomaly(Toggle):
     default = 0
 
 @dataclass
-class Escapists2Options(PerGameCommonOptions):
+class TheEscapists2Options(PerGameCommonOptions):
     center_perks: CenterPerks
     cougar_creek: CougarCreek
     rattlesnake_springs: RattlesnakeSprings
