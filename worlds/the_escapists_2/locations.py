@@ -8,7 +8,6 @@ from . import items
 if TYPE_CHECKING:
     from .world import TheEscapists2World
 
-# TODO: Populate this with locations
 BASE_LOCATION_ID: int = 80000
 
 LOCATION_NAME_TO_ID: Dict[str, int] = {

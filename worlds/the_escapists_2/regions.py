@@ -59,8 +59,6 @@ def create_all_regions(world: TheEscapists2World) -> None:
     world.multiworld.regions += TE2regions
 
 def create_regions(world: TheEscapists2World) -> None:
-    # TODO: See if worth setting rules here over rules.py
-
     prison_select_menu = world.get_region("Prison Select Menu")
 
     global_prison = world.get_region("Global")
