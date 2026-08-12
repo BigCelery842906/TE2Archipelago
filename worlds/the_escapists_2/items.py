@@ -76,7 +76,7 @@ ITEM_NAME_TO_ID = {
     "Progressive Strength": 235,
     "Progressive Stamina": 236,
     "Progressive Intellect": 237,
-    "Unique Escapes": 238,
+    # "Unique Escapes": 238,
 
     # --- TRAPS - Starting from 240
     "Max Heat Trap": 240,
@@ -102,21 +102,21 @@ ITEM_NAME_TO_ID = {
     "TalcumPowder": 263,
     "Nails": 264,
     "Mug": 265,
-    "PlasticSpoon": 265,
-    "PlasticFork": 266,
-    "PlasticKnife": 267,
-    "TeaBag": 268,
-    "Sugar": 269,
-    "Milk": 270,
-    "Cookie": 271,
-    "Chocolate": 272,
-    "BalsaWood": 273,
-    "ArtBrush": 274,
-    "ArtPaints": 275,
-    "Sheet": 276,
-    "Pillow": 277,
-    "PillowCase": 278,
-    "InmateOutfit": 279,
+    "PlasticSpoon": 266,
+    "PlasticFork": 267,
+    "PlasticKnife": 268,
+    "TeaBag": 269,
+    "Sugar": 270,
+    "Milk": 271,
+    "Cookie": 272,
+    "Chocolate": 273,
+    "BalsaWood": 274,
+    "ArtBrush": 275,
+    "ArtPaints": 276,
+    "Sheet": 277,
+    "Pillow": 278,
+    "PillowCase": 279,
+    "InmateOutfit": 280,
 }
 
 DEFAULT_ITEM_CLASSIFICATIONS = {
@@ -152,11 +152,16 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "K.A.P.O.W Camp Prison Unlock": ItemClassification.progression,
     "H.M.P. Offshore Prison Unlock": ItemClassification.progression,
     "Fort Tundra Prison Unlock": ItemClassification.progression,
-    "Area ItemClassification.progression7 Prison Unlock": ItemClassification.progression,
+    "Area 17 Prison Unlock": ItemClassification.progression,
     "U.S.S. Anomaly Prison Unlock": ItemClassification.progression,
     "Cougar Creek Railroad Prison Unlock": ItemClassification.progression,
     "H.M.S. Orca Prison Unlock": ItemClassification.progression,
     "Air Force Con Prison Unlock": ItemClassification.progression,
+
+    # --- PROGRESSIVE STATS
+    "Progressive Strength": ItemClassification.progression,
+    "Progressive Stamina": ItemClassification.progression,
+    "Progressive Intellect": ItemClassification.progression,
 
     # --- USEFUL ITEMS
     "Blueprint: Multitool": ItemClassification.useful,
@@ -304,8 +309,8 @@ def create_all_items(world: TheEscapists2World) -> None:
         for i in range(30, 100, increment):
             itempool.append(world.create_item("Progressive Intellect"))
 
-        for i in range(0, world.options.unique_escapes_required):
-            itempool.append(world.create_item("Unique Escapes"))
+      #  for i in range(0, world.options.unique_escapes_required):
+      #      itempool.append(world.create_item("Unique Escapes"))
 
     number_of_items = len(itempool)
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))

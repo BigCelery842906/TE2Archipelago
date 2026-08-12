@@ -3,6 +3,8 @@ from typing import TYPE_CHECKING, Dict
 
 from BaseClasses import Location
 
+from . import items
+
 if TYPE_CHECKING:
     from .world import TheEscapists2World
 
@@ -340,7 +342,7 @@ def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | No
 def create_all_locations(world: TheEscapists2World) -> None:
     create_regular_locations(world)
     # Don't think I have events that need to be created?
-    # create_events(world)
+    create_events(world)
 
 def create_regular_locations(world: TheEscapists2World) -> None:
 
@@ -468,7 +470,39 @@ def create_regular_locations(world: TheEscapists2World) -> None:
 
     if world.options.air_force_con:
         air_force_con = world.get_region("Air Force Con")
-        temp_locations = "Escape: Passport To Freedom (Air Force Con)", "Escape: Plane Crazy (Air Force Con)"
+        temp_locations = ["Escape: Passport To Freedom (Air Force Con)", "Escape: Plane Crazy (Air Force Con)"]
         for i in range (1, 13): temp_locations.append(f"Air Force Con Desk {i}")
         air_force_con_locations = get_location_names_with_ids(temp_locations)
         air_force_con.add_locations(air_force_con_locations, TheEscapists2Location)
+
+def create_events(world: TheEscapists2World) -> None:
+    if world.options.center_perks:
+        center_perks = world.get_region("Center Perks")
+        center_perks.add_event("Center Perks 2.0 Perimeter Escape", "Unique Escapes", location_type=TheEscapists2Location, item_type = items.TheEscapists2Item)
+        center_perks.add_event("Escape: Perimeter Breakout (Center Perks 2.0)", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+    if world.options.rattlesnake_springs:
+        rattlesnake_springs = world.get_region("Rattlesnake Springs")
+
+    if world.options.kapow_camp:
+        kapow_camp = world.get_region("KAPOW Camp")
+
+    if world.options.hmp_offshore:
+        hmp_offshore = world.get_region("HMP Offshore")
+
+    if world.options.fort_tundra:
+        fort_tundra = world.get_region("Fort Tundra")
+
+    if world.options.area_17:
+        area_17 = world.get_region("Area 17")
+
+    if world.options.uss_anomaly:
+        uss_anomaly = world.get_region("USS Anomaly")
+
+    if world.options.cougar_creek:
+        cougar_creek = world.get_region("Cougar Creek")
+
+    if world.options.hms_orca:
+        hms_orca = world.get_region("HMS Orca")
+
+    if world.options.air_force_con:
+        air_force_con = world.get_region("Air Force Con")

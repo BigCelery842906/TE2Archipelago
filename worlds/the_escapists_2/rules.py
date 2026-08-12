@@ -68,7 +68,7 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
 def set_all_location_rules(world: TheEscapists2World) -> None:
 
     if world.options.rattlesnake_springs or world.options.hmp_offshore:
-        world.set_rule(world.get_location("Job: Woodwork"), HasAny(CP2_Unlock, HMPOFF_Unlock))
+        world.set_rule(world.get_location("Job: Woodwork"), HasAny(RSS_Unlock, HMPOFF_Unlock))
     if world.options.center_perks or world.options.rattlesnake_springs:
         world.set_rule(world.get_location("Job: Shoemaker"), HasAny(CP2_Unlock, RSS_Unlock))
     if world.options.hmp_offshore or world.options.fort_tundra or world.options.area_17:
@@ -78,7 +78,7 @@ def set_all_location_rules(world: TheEscapists2World) -> None:
     if world.options.kapow_camp or world.options.fort_tundra or world.options.area_17:
         world.set_rule(world.get_location("Job: Plumbing"), HasAny(KAPOW_Unlock, FT_Unlock, A17_Unlock))
     if world.options.area_17 or world.options.uss_anomaly:
-        world.set_rule(world.get_location("Job: Engineering"), HasAny(A17_Unlock), USSA_Unlock)
+        world.set_rule(world.get_location("Job: Engineering"), HasAny(A17_Unlock, USSA_Unlock))
     if world.options.kapow_camp or world.options.uss_anomaly:
         world.set_rule(world.get_location("Job: Kitchen"), HasAny(KAPOW_Unlock, USSA_Unlock))
         world.set_rule(world.get_location("Job: Farming"), HasAny(KAPOW_Unlock, USSA_Unlock))
