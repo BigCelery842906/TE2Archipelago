@@ -92,4 +92,4 @@ def set_all_location_rules(world: TheEscapists2World) -> None:
         world.set_rule(world.get_location("Job: Painting"), HasAny(CP2_Unlock, RSS_Unlock, FT_Unlock))
 
 def set_completion_condition(world: TheEscapists2World) -> None:
-    world.set_completion_rule(Has("Unique Escapes", count = world.options.unique_escapes_required))
+    world.set_completion_rule(Has("Unique Escapes", count = int(world.options.unique_escapes_required)))

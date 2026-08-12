@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from Options import Toggle, PerGameCommonOptions
+from Options import Toggle, PerGameCommonOptions, Range
 
 
 class CenterPerks(Toggle):
@@ -61,6 +61,40 @@ class USSAnomaly(Toggle):
     display_name = "U.S.S. Anomaly"
     default = 0
 
+class StrengthStep(Range):
+    """How often you will send out a check for increasing your strength."""
+    display_name = "Strength Step"
+    default = 10
+    range_start = 1
+    range_end = 100
+
+class StaminaStep(Range):
+    """How often you will send out a check for increasing your stamina."""
+    display_name = "Stamina Step"
+    default = 10
+    range_start = 1
+    range_end = 100
+
+class IntellectStep(Range):
+    """How often you will send out a check for increasing your intellect."""
+    display_name = "Intellect Step"
+    default = 10
+    range_start = 1
+    range_end = 100
+
+class TrapChance(Range):
+    """What percent of filler items are replaced with traps"""
+    display_name = "Trap Chance"
+    default = 5
+    range_start = 0
+    range_end = 100
+
+class UniqueEscapesRequired(Range):
+    """How many unique escapes you must make to goal."""
+    display_name = "Unique Escapes Required"
+    default = 1
+    range_start = 0
+    range_end = 21
 @dataclass
 class TheEscapists2Options(PerGameCommonOptions):
     center_perks: CenterPerks
@@ -73,3 +107,8 @@ class TheEscapists2Options(PerGameCommonOptions):
     area_17: Area17
     air_force_con: AirForceCon
     uss_anomaly: USSAnomaly
+    strength_step: StrengthStep
+    stamina_step: StaminaStep
+    intellect_step: IntellectStep
+    trap_chance: TrapChance
+    unique_escapes_required: UniqueEscapesRequired

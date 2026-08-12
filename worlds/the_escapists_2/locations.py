@@ -347,9 +347,8 @@ def create_regular_locations(world: TheEscapists2World) -> None:
     global_region = world.get_region("Global")
 
     #Stats
-    # TODO: increment = world.options.strength_step
-    increment = 5
 
+    increment = world.options.strength_step
     temp_locations = ["Strength Stat: Max", "Stamina Stat: Max", "Intellect Stat: Max"]
     for i in range(30, 100, increment):
         temp_locations.append(f"Strength Stat: {i}")

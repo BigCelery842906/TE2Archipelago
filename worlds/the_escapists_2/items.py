@@ -76,6 +76,7 @@ ITEM_NAME_TO_ID = {
     "Progressive Strength": 235,
     "Progressive Stamina": 236,
     "Progressive Intellect": 237,
+    "Unique Escapes": 238,
 
     # --- TRAPS - Starting from 240
     "Max Heat Trap": 240,
@@ -236,7 +237,7 @@ def get_random_filler_item_name(world: TheEscapists2World) -> str:
 
 def create_item_with_correct_classification(world: TheEscapists2World, name: str) -> TheEscapists2Item:
     classificaion = DEFAULT_ITEM_CLASSIFICATIONS[name]
-    return TheEscapists2Item(world, classificaion, ITEM_NAME_TO_ID[name], world.player)
+    return TheEscapists2Item(name, classificaion, ITEM_NAME_TO_ID[name], world.player)
 
 def create_all_items(world: TheEscapists2World) -> None:
 
@@ -292,8 +293,6 @@ def create_all_items(world: TheEscapists2World) -> None:
 
         # Stats
         increment = world.options.strength_step
-        #increment = 5
-
         for i in range(30, 100, increment):
             itempool.append(world.create_item("Progressive Strength"))
 
@@ -304,6 +303,9 @@ def create_all_items(world: TheEscapists2World) -> None:
         increment = world.options.intellect_step
         for i in range(30, 100, increment):
             itempool.append(world.create_item("Progressive Intellect"))
+
+        for i in range(0, world.options.unique_escapes_required):
+            itempool.append(world.create_item("Unique Escapes"))
 
     number_of_items = len(itempool)
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))

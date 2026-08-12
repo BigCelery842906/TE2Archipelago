@@ -11,9 +11,13 @@ if TYPE_CHECKING:
 
 def create_and_connect_regions(world: TheEscapists2World) -> None:
     create_all_regions(world)
+    create_regions(world)
 
 def create_all_regions(world: TheEscapists2World) -> None:
-    TE2regions = {}
+    TE2regions = []
+
+    newRegion = Region("Prison Select Menu", world.player, world.multiworld)
+    TE2regions.append(newRegion)
 
     newRegion = Region("Global", world.player, world.multiworld)
     TE2regions.append(newRegion)
