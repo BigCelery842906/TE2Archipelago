@@ -479,7 +479,6 @@ def create_events(world: TheEscapists2World) -> None:
     if world.options.center_perks:
         center_perks = world.get_region("Center Perks")
         center_perks.add_event("Center Perks 2.0 Perimeter Escape", "Unique Escapes", location_type=TheEscapists2Location, item_type = items.TheEscapists2Item)
-        center_perks.add_event("Escape: Perimeter Breakout (Center Perks 2.0)", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
     if world.options.rattlesnake_springs:
         rattlesnake_springs = world.get_region("Rattlesnake Springs")
 
