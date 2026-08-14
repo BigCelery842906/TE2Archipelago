@@ -206,7 +206,7 @@ def fill_restrictive(multiworld: MultiWorld, base_state: CollectionState, locati
             spot_to_fill.locked = lock
             placements.append(spot_to_fill)
             placed += 1
-            if not placed % 1000:
+            if not placed % 100:
                 _log_fill_progress(name, placed, total)
             if on_place:
                 on_place(spot_to_fill)
