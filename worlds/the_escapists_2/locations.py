@@ -285,9 +285,9 @@ LOCATION_NAME_TO_ID: Dict[str, int] = {
     "Escape: Speed McQueen (K.A.P.O.W Camp)"  : BASE_LOCATION_ID + 3000 + 100 + 2,
 
     #HMP Offshore
-    "Escape: Perimeter Breakout (H.M.P Offshore)" : BASE_LOCATION_ID + 4000 + 100 + 1,
-    "Escape: Swimming With Dolphins  (H.M.P Offshore)" : BASE_LOCATION_ID + 4000 + 100 + 2,
-    "Escape: Trash Talk  (H.M.P Offshore)" : BASE_LOCATION_ID + 4000 + 100 + 3,
+    "Escape: Perimeter Breakout (H.M.P. Offshore)" : BASE_LOCATION_ID + 4000 + 100 + 1,
+    "Escape: Swimming With Dolphins  (H.M.P. Offshore)" : BASE_LOCATION_ID + 4000 + 100 + 2,
+    "Escape: Trash Talk  (H.M.P. Offshore)" : BASE_LOCATION_ID + 4000 + 100 + 3,
 
     #Fort Tundra
     "Escape: Perimeter Breakout (Fort Tundra)" : BASE_LOCATION_ID + 5000 + 100 + 1,
