@@ -21,14 +21,14 @@ LOCATION_NAME_TO_ID: Dict[str, int] = {
 
     # Global Checks (Doesn't matter what prison you get these in)
 
-    # Crafting
-    "Craft: Tool Handle": BASE_LOCATION_ID + 10,
-    "Craft: Flimsy Pickaxe": BASE_LOCATION_ID + 11,
-    "Craft: Flimsy Shovel": BASE_LOCATION_ID + 12,
-    "Craft: Flimsy Cutters": BASE_LOCATION_ID + 13,
-    "Craft: Fake Wall Block": BASE_LOCATION_ID + 14,
-    "Craft: Contraband Pouch": BASE_LOCATION_ID + 15,
-    "Craft: Bed Dummy": BASE_LOCATION_ID + 16,
+    # Crafting TODO: Implementation of this
+    #"Craft: Tool Handle": BASE_LOCATION_ID + 10,
+    #"Craft: Flimsy Pickaxe": BASE_LOCATION_ID + 11,
+    #"Craft: Flimsy Shovel": BASE_LOCATION_ID + 12,
+    #"Craft: Flimsy Cutters": BASE_LOCATION_ID + 13,
+    #"Craft: Fake Wall Block": BASE_LOCATION_ID + 14,
+    #"Craft: Contraband Pouch": BASE_LOCATION_ID + 15,
+    #"Craft: Bed Dummy": BASE_LOCATION_ID + 16,
 
     #TODO: Check these to see if I put them here or not
     #"Craft: Fake Carrot": BASE_LOCATION_ID + 17,
@@ -327,7 +327,7 @@ for i in range(1, 37): LOCATION_NAME_TO_ID[f"Fort Tundra Desk {i}"] = BASE_LOCAT
 for i in range(1, 34): LOCATION_NAME_TO_ID[f"Area 17 Desk {i}"] = BASE_LOCATION_ID + 6000 + i
 for i in range(1, 29): LOCATION_NAME_TO_ID[f"U.S.S. Anomaly Desk {i}"] = BASE_LOCATION_ID + 7000 + i
 
-#TODO: Cougar Creek Railroad to double check
+#TODO: Cougar Creek Railroad to double check desk count
 for i in range(1, 8): LOCATION_NAME_TO_ID[f"Cougar Creek Railroad Desk {i}"] = BASE_LOCATION_ID + 8000 + i
 for i in range(1, 16): LOCATION_NAME_TO_ID[f"H.M.S. Orca Desk {i}"] = BASE_LOCATION_ID + 9000 + i
 for i in range(1, 13): LOCATION_NAME_TO_ID[f"Air Force Con Desk {i}"] = BASE_LOCATION_ID + 10000 + i
@@ -340,7 +340,6 @@ def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | No
 
 def create_all_locations(world: TheEscapists2World) -> None:
     create_regular_locations(world)
-    # Don't think I have events that need to be created?
     create_events(world)
 
 def create_regular_locations(world: TheEscapists2World) -> None:
@@ -394,14 +393,14 @@ def create_regular_locations(world: TheEscapists2World) -> None:
     global_region.add_locations(global_region_locations)
 
     #Crafting
-    global_region_locations = get_location_names_with_ids(["Craft: Tool Handle",
-                                                           "Craft: Flimsy Pickaxe",
-                                                           "Craft: Flimsy Shovel",
-                                                           "Craft: Flimsy Cutters",
-                                                           "Craft: Fake Wall Block",
-                                                           "Craft: Contraband Pouch",
-                                                           "Craft: Bed Dummy"])
-    global_region.add_locations(global_region_locations)
+    #global_region_locations = get_location_names_with_ids(["Craft: Tool Handle",
+    #                                                       "Craft: Flimsy Pickaxe",
+    #                                                       "Craft: Flimsy Shovel",
+    #                                                       "Craft: Flimsy Cutters",
+    #                                                       "Craft: Fake Wall Block",
+    #                                                       "Craft: Contraband Pouch",
+    #                                                       "Craft: Bed Dummy"])
+    #global_region.add_locations(global_region_locations)
 
     #Prison Specific Checks
     if world.options.center_perks:

@@ -95,6 +95,7 @@ class UniqueEscapesRequired(Range):
     default = 1
     range_start = 0
     range_end = 21
+
 @dataclass
 class TheEscapists2Options(PerGameCommonOptions):
     center_perks: CenterPerks

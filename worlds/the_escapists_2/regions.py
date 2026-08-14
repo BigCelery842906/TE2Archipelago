@@ -103,15 +103,3 @@ def create_regions(world: TheEscapists2World) -> None:
     if world.options.air_force_con:
         air_force_con = world.get_region("Air Force Con")
         prison_select_menu.connect(air_force_con, "Menu to Air Force Con")
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
+from Options import OptionError
 
 if TYPE_CHECKING:
     from .world import TheEscapists2World
@@ -248,28 +249,34 @@ def create_all_items(world: TheEscapists2World) -> None:
 
     itempool: list[Item] = []
     validPrisonUnlocks = []
+
     if world.options.center_perks:
         validPrisonUnlocks.append("Center Perks 2.0 Prison Unlock")
         itempool.append(world.create_item("Center Perks 2.0 Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Fake Audio Equipment"))
         itempool.append(world.create_item("Blueprint: Civilian Clothes"))
+
     if world.options.rattlesnake_springs:
         validPrisonUnlocks.append("Rattlesnake Springs Prison Unlock")
         itempool.append(world.create_item("Rattlesnake Springs Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Complete Crossbow"))
+
     if world.options.kapow_camp:
         validPrisonUnlocks.append("K.A.P.O.W Camp Prison Unlock")
         itempool.append(world.create_item( "K.A.P.O.W Camp Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Makeshift Rocket Thruster"))
         itempool.append(world.create_item("Blueprint: Makeshift Ladder"))
+
     if world.options.hmp_offshore:
-        validPrisonUnlocks.append("H.M.P Offshore Prison Unlock")
+        validPrisonUnlocks.append("H.M.P. Offshore Prison Unlock")
         itempool.append(world.create_item("H.M.P. Offshore Prison Unlock"))
+
     if world.options.fort_tundra:
         validPrisonUnlocks.append("Fort Tundra Prison Unlock")
         itempool.append(world.create_item("Fort Tundra Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Bed Dummy"))
         itempool.append(world.create_item("Blueprint: Guard Outfit"))
+
     if world.options.area_17:
         validPrisonUnlocks.append("Area 17 Prison Unlock")
         itempool.append(world.create_item("Area 17 Prison Unlock"))
@@ -278,39 +285,43 @@ def create_all_items(world: TheEscapists2World) -> None:
         itempool.append(world.create_item("Blueprint: Plastic Cyan Key"))
         itempool.append(world.create_item("Blueprint: Key Mould Red"))
         itempool.append(world.create_item("Blueprint: Key Mould Cyan"))
+
     if world.options.uss_anomaly:
         validPrisonUnlocks.append("U.S.S. Anomaly Prison Unlock")
         itempool.append(world.create_item("U.S.S. Anomaly Prison Unlock"))
+
     if world.options.cougar_creek:
         validPrisonUnlocks.append("Cougar Creek Railroad Prison Unlock")
         itempool.append(world.create_item("Cougar Creek Railroad Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Fake Carrot"))
         itempool.append(world.create_item("Blueprint: Grappling Hook"))
+
     if world.options.hms_orca:
         validPrisonUnlocks.append("H.M.S. Orca Prison Unlock")
         itempool.append(world.create_item("H.M.S. Orca Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Makeshift Breathing Apparatus"))
+
     if world.options.air_force_con:
         validPrisonUnlocks.append("Air Force Con Prison Unlock")
         itempool.append(world.create_item("Air Force Con Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Makeshift Harness"))
         itempool.append(world.create_item("Blueprint: Parachute"))
 
-        # Stats
-        increment = world.options.strength_step
-        for i in range(30, 100, increment):
-            itempool.append(world.create_item("Progressive Strength"))
+    if len(validPrisonUnlocks) == 0:
+        raise OptionError("No prisons have been enabled. You must enable at least one prison")
 
-        increment = world.options.stamina_step
-        for i in range(30, 100, increment):
-            itempool.append(world.create_item("Progressive Stamina"))
+    # Stats
+    increment = world.options.strength_step
+    for i in range(30, 100, increment):
+        itempool.append(world.create_item("Progressive Strength"))
 
-        increment = world.options.intellect_step
-        for i in range(30, 100, increment):
-            itempool.append(world.create_item("Progressive Intellect"))
+    increment = world.options.stamina_step
+    for i in range(30, 100, increment):
+        itempool.append(world.create_item("Progressive Stamina"))
 
-      #  for i in range(0, world.options.unique_escapes_required):
-      #      itempool.append(world.create_item("Unique Escapes"))
+    increment = world.options.intellect_step
+    for i in range(30, 100, increment):
+        itempool.append(world.create_item("Progressive Intellect"))
 
     number_of_items = len(itempool)
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
