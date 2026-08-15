@@ -426,7 +426,7 @@ def create_regular_locations(world: TheEscapists2World) -> None:
 
     if world.options.hmp_offshore:
         hmp_offshore = world.get_region("HMP Offshore")
-        temp_locations = ["Escape: Perimeter Breakout (H.M.P Offshore)", "Escape: Swimming With Dolphins  (H.M.P Offshore)", "Escape: Trash Talk  (H.M.P Offshore)"]
+        temp_locations = ["Escape: Perimeter Breakout (H.M.P. Offshore)", "Escape: Swimming With Dolphins  (H.M.P. Offshore)", "Escape: Trash Talk  (H.M.P. Offshore)"]
         for i in range (1, 35): temp_locations.append(f"H.M.P. Offshore Desk {i}")
         hmp_offshore_locations = get_location_names_with_ids(temp_locations)
         hmp_offshore.add_locations(hmp_offshore_locations, TheEscapists2Location)
