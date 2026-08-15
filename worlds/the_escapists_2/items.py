@@ -15,17 +15,12 @@ ITEM_NAME_TO_ID = {
 
     "Blueprint: Fake Carrot": 3,
     "Blueprint: Grappling Hook": 4,
-
     "Blueprint: Complete Crossbow": 5,
-
     "Blueprint: Makeshift Rocket Thruster": 6,
     "Blueprint: Makeshift Ladder": 7,
-
     "Blueprint: Makeshift Breathing Apparatus": 8,
-
     "Blueprint: Bed Dummy": 9,
     "Blueprint: Guard Outfit": 10,
-
     "Blueprint: Security Pass": 11,
     "Blueprint: Plastic Red Key": 12,
     "Blueprint: Plastic Cyan Key": 13,
@@ -34,7 +29,6 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Makeshift Harness": 16,
     "Blueprint: Parachute": 17,
     "Blueprint: Lightweight Cutters": 18,
-
     # --- PRISON UNLOCKS
     "Center Perks 2.0 Prison Unlock": 19,
     "Rattlesnake Springs Prison Unlock": 20,
@@ -202,34 +196,43 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Comb": ItemClassification.filler,
     "Toothpaste": ItemClassification.filler,
     "Toothbrush": ItemClassification.filler,
-    "ToiletPaper": ItemClassification.filler,
-    "Dirt": ItemClassification.filler,
+    "Roll of Toilet Paper": ItemClassification.filler,
+    "Soil": ItemClassification.filler,
     "Sock": ItemClassification.filler,
     "Magazine": ItemClassification.filler,
     "Book": ItemClassification.filler,
-    "PlayingCards": ItemClassification.filler,
     "Foil": ItemClassification.filler,
-    "PaperClip": ItemClassification.filler,
-    "RubberGloves": ItemClassification.filler,
-    "TalcumPowder": ItemClassification.filler,
-    "Nails": ItemClassification.filler,
+    "Pair of Rubber Gloves": ItemClassification.filler,
+    "Nail Polish": ItemClassification.filler,
     "Mug": ItemClassification.filler,
-    "PlasticSpoon": ItemClassification.filler,
-    "PlasticFork": ItemClassification.filler,
-    "PlasticKnife": ItemClassification.filler,
-    "TeaBag": ItemClassification.filler,
-    "Sugar": ItemClassification.filler,
-    "Milk": ItemClassification.filler,
+    "Plastic Spoon": ItemClassification.filler,
+    "Plastic Fork": ItemClassification.filler,
+    "Plastic Knife": ItemClassification.filler,
+    "Tea Bag": ItemClassification.filler,
+    "Lump of Sugar": ItemClassification.filler,
+    "Bottle of Milk": ItemClassification.filler,
     "Cookie": ItemClassification.filler,
-    "Chocolate": ItemClassification.filler,
-    "BalsaWood": ItemClassification.filler,
-    "ArtBrush": ItemClassification.filler,
-    "ArtPaints": ItemClassification.filler,
-    "Sheet": ItemClassification.filler,
+    "Fine Art Brush": ItemClassification.filler,
+    "Tube of Art Paints": ItemClassification.filler,
+    "Bed Sheet": ItemClassification.filler,
     "Pillow": ItemClassification.filler,
-    "PillowCase": ItemClassification.filler,
-    "InmateOutfit": ItemClassification.filler,
+    "Pillow Case": ItemClassification.filler,
+    "Inmate Outfit": ItemClassification.filler,
+    "Coins": ItemClassification.filler,
+
+
+
+
 }
+fillerItems = []
+trapItems = []
+for item in DEFAULT_ITEM_CLASSIFICATIONS:
+    if DEFAULT_ITEM_CLASSIFICATIONS[item] == ItemClassification.filler:
+        fillerItems.append(item)
+    if DEFAULT_ITEM_CLASSIFICATIONS[item] == ItemClassification.trap:
+        trapItems.append(item)
+
+
 
 class TheEscapists2Item(Item):
     game = "The Escapists 2"
@@ -238,9 +241,12 @@ def get_random_filler_item_name(world: TheEscapists2World) -> str:
 
     #TODO: Actually set these as random
     if world.random.randint(0, 99) < world.options.trap_chance:
-        return "Max Heat Trap" #Temp set trap
+        trapItem = trapItems[world.random.randint(0, len(trapItems) -1)]
+        return trapItem
 
-    return "Soap" #Also temp
+    fillerItem = fillerItems[world.random.randint(0, len(fillerItems) -1)]
+    return fillerItem
+
 
 def create_item_with_correct_classification(world: TheEscapists2World, name: str) -> TheEscapists2Item:
     classificaion = DEFAULT_ITEM_CLASSIFICATIONS[name]
