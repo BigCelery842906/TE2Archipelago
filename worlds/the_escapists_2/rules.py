@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
+from BaseClasses import CollectionState
 from rule_builder.rules import Has, HasAny
 
 if TYPE_CHECKING:
@@ -26,12 +27,58 @@ CCR_Unlock = "Cougar Creek Railroad Prison Unlock"
 HMSO_Unlock = "H.M.S. Orca Prison Unlock"
 AFC_Unlock = "Air Force Con Prison Unlock"
 
+#TODO: THIS COULD BE WRONG, I MIGHT WANT TO BE CALCULATING HOW MANY ITEMS ARE REQUIRED TO HIT A VALUE
+def get_current_stat_value(world: TheEscapists2World, state: CollectionState, stat_to_check) -> None:
+    if stat_to_check == "Strength":
+        option_step = world.options.strength_step
+        progressive_item = "Progressive Strength"
+    elif stat_to_check == "Stamina" :
+        option_step = world.options.stamina_step
+        progressive_item = "Progressive Stamina"
+    elif stat_to_check == "Intellect":
+        option_step = world.options.intellect_step
+        progressive_item = "Progressive Intellect"
+    else:
+        raise KeyError("Stat Value check not valid, value provided did not match a stat type.")
+
+    #TODO: Replace with this: https://alwaysintreble.github.io/Archipelago/baseclasses.html#BaseClasses.CollectionState.count_from_list
+    num_of_progressives_received = state.count_from_list(progressive_item, world.player)
+
+    current_stat_value = 30 + (num_of_progressives_received * option_step)
+
+    if current_stat_value > 100:
+        return 100
+
+    else:
+        return current_stat_value
+
+def get_items_required_for_stat_value(world: TheEscapists2World, stat_to_check, value_to_get) -> int:
+    if stat_to_check == "Strength":
+        option_step = world.options.strength_step
+    elif stat_to_check == "Stamina":
+        option_step = world.options.stamina_step
+    elif stat_to_check == "Intellect":
+        option_step = world.options.intellect_step
+    else:
+        raise KeyError("Stat Value check not valid, value provided did not match a stat type. Can't return the items required for this stat value.")
+
+    items_required = 0
+    for i in range(30, 100, option_step):
+        items_required += 1
+        if i > value_to_get:
+            return items_required
+    return items_required
+
+
 def set_all_entrance_rules(world: TheEscapists2World) -> None:
     global max_escapes_possible
     if world.options.center_perks:
         to_center_perks = world.get_entrance("Menu to Center Perks")
         world.set_rule(to_center_perks, Has(CP2_Unlock))
         max_escapes_possible += 2
+
+        items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
+        world.set_rule(world.get_location("Escape: Perimeter Breakout (Center Perks 2.0)"), Has("Blueprint: Civilian Clothes") & Has("Blueprint: Fake Audio Equipment") & Has("Progressive Intellect", items_for_50_intellect))
 
     if world.options.rattlesnake_springs:
         to_rattlesnake_springs = world.get_entrance("Menu to Rattlesnake Springs")
