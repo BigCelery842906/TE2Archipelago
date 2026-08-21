@@ -220,9 +220,6 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Inmate Outfit": ItemClassification.filler,
     "Coins": ItemClassification.filler,
 
-
-
-
 }
 fillerItems = []
 trapItems = []
@@ -231,8 +228,6 @@ for item in DEFAULT_ITEM_CLASSIFICATIONS:
         fillerItems.append(item)
     if DEFAULT_ITEM_CLASSIFICATIONS[item] == ItemClassification.trap:
         trapItems.append(item)
-
-
 
 class TheEscapists2Item(Item):
     game = "The Escapists 2"
@@ -297,7 +292,7 @@ def create_all_items(world: TheEscapists2World) -> None:
         validPrisonUnlocks.append("U.S.S. Anomaly Prison Unlock")
         itempool.append(world.create_item("U.S.S. Anomaly Prison Unlock"))
 
-    if world.options.cougar_creek:
+    if world.options.cougar_creek_railroad:
         validPrisonUnlocks.append("Cougar Creek Railroad Prison Unlock")
         itempool.append(world.create_item("Cougar Creek Railroad Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Fake Carrot"))

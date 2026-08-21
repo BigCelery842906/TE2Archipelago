@@ -45,7 +45,7 @@ def create_all_regions(world: TheEscapists2World) -> None:
         TE2regions.append(newRegion)
         
     # Transport Prisons
-    if world.options.cougar_creek:        
+    if world.options.cougar_creek_railroad:
         newRegion = Region("Cougar Creek", world.player, world.multiworld)
         TE2regions.append(newRegion)
     if world.options.hms_orca:
@@ -92,7 +92,7 @@ def create_regions(world: TheEscapists2World) -> None:
         uss_anomaly = world.get_region("USS Anomaly")
         prison_select_menu.connect(uss_anomaly, "Menu to USS Anomaly")
 
-    if world.options.cougar_creek:
+    if world.options.cougar_creek_railroad:
         cougar_creek = world.get_region("Cougar Creek")
         prison_select_menu.connect(cougar_creek, "Menu to Cougar Creek")
 

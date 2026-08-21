@@ -40,4 +40,4 @@ class TheEscapists2World(World):
 
     def fill_slot_data(self) -> Mapping[str, Any]:
         # If you need access to the player's chosen options on the client side, there is a helper for that.
-        return self.options.as_dict("center_perks", "cougar_creek", "rattlesnake_springs", "kapow_camp", "hms_orca", "hmp_offshore", "fort_tundra", "area_17", "air_force_con", "uss_anomaly", "strength_step", "stamina_step", "intellect_step", "unique_escapes_required")
+        return self.options.as_dict("center_perks", "cougar_creek_railroad", "rattlesnake_springs", "kapow_camp", "hms_orca", "hmp_offshore", "fort_tundra", "area_17", "air_force_con", "uss_anomaly", "strength_step", "stamina_step", "intellect_step", "unique_escapes_required")

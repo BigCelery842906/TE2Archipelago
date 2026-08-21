@@ -99,7 +99,7 @@ class UniqueEscapesRequired(Range):
 @dataclass
 class TheEscapists2Options(PerGameCommonOptions):
     center_perks: CenterPerks
-    cougar_creek: CougarCreek
+    cougar_creek_railroad: CougarCreek
     rattlesnake_springs: RattlesnakeSprings
     kapow_camp: KAPOWCamp
     hms_orca: HMSOrca

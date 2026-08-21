@@ -452,7 +452,7 @@ def create_regular_locations(world: TheEscapists2World) -> None:
         uss_anomaly_locations = get_location_names_with_ids(temp_locations)
         uss_anomaly.add_locations(uss_anomaly_locations, TheEscapists2Location)
 
-    if world.options.cougar_creek:
+    if world.options.cougar_creek_railroad:
         cougar_creek = world.get_region("Cougar Creek")
         temp_locations = ["Escape: My Little Phoney (Cougar Creek Railroad)", "Escape: Hooked On You (Cougar Creek Railroad)"]
         for i in range (1,8): temp_locations.append(f"Cougar Creek Railroad Desk {i}")
@@ -511,10 +511,10 @@ def create_events(world: TheEscapists2World) -> None:
         uss_anomaly.add_event("USSA PE", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
         uss_anomaly.add_event("USSA RFS", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
 
-    if world.options.cougar_creek:
-        cougar_creek = world.get_region("Cougar Creek")
-        cougar_creek.add_event("CCR MLP", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
-        cougar_creek.add_event("CCR HOY", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+    if world.options.cougar_creek_railroad:
+        cougar_creek_railroad = world.get_region("Cougar Creek")
+        cougar_creek_railroad.add_event("CCR MLP", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
+        cougar_creek_railroad.add_event("CCR HOY", "Unique Escapes", location_type=TheEscapists2Location, item_type=items.TheEscapists2Item)
 
     if world.options.hms_orca:
         hms_orca = world.get_region("HMS Orca")

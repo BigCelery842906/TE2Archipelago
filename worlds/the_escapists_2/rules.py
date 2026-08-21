@@ -63,7 +63,7 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_uss_anomaly, Has(USSA_Unlock))
         max_escapes_possible += 2
 
-    if world.options.cougar_creek:
+    if world.options.cougar_creek_railroad:
         to_cougar_creek = world.get_entrance("Menu to Cougar Creek")
         world.set_rule(to_cougar_creek, Has(CCR_Unlock))
         max_escapes_possible += 2
