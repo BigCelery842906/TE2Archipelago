@@ -200,63 +200,63 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
 
 
 def set_all_location_rules(world: TheEscapists2World) -> None:
-    logging.warning("Job locations currently disabled for fuzz testing. Please notify the dev (BigCelery842906) if you get this notification")
-    # if world.options.rattlesnake_springs or world.options.hmp_offshore:
-    #     items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
-    #     items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
-    #     world.set_rule(world.get_location("Job: Woodwork"), HasAny(RSS_Unlock, HMPOFF_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_40_intellect))
-    #
-    # if world.options.center_perks or world.options.rattlesnake_springs:
-    #     items_for_40_strength = get_items_required_for_stat_value(world, "Strength", 40)
-    #     items_for_80_intellect = get_items_required_for_stat_value(world, "Intellect", 80)
-    #     world.set_rule(world.get_location("Job: Shoemaker"), HasAny(CP2_Unlock, RSS_Unlock) & Has("Progressive Strength", items_for_40_strength) & Has("Progressive Intellect", items_for_80_intellect))
-    #
-    # if world.options.hmp_offshore or world.options.fort_tundra or world.options.area_17:
-    #     items_for_50_strength = get_items_required_for_stat_value(world, "Strength", 50)
-    #     items_for_80_intellect = get_items_required_for_stat_value(world, "Intellect", 80)
-    #     world.set_rule(world.get_location("Job: Blacksmith"), HasAny(HMPOFF_Unlock, FT_Unlock, A17_Unlock) & Has("Progressive Strength", items_for_50_strength) & Has("Progressive Intellect", items_for_80_intellect))
-    #
-    # if world.options.hmp_offshore or world.options.uss_anomaly:
-    #     items_for_70_strength = get_items_required_for_stat_value(world, "Strength", 70)
-    #     items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
-    #     world.set_rule(world.get_location("Job: Mining"), HasAny(HMPOFF_Unlock, USSA_Unlock) & Has("Progressive Strength", items_for_70_strength) & Has("Progressive Intellect", items_for_50_intellect))
-    #
-    # if world.options.kapow_camp or world.options.fort_tundra or world.options.area_17:
-    #     items_for_40_strength = get_items_required_for_stat_value(world, "Strength", 40)
-    #     items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
-    #     world.set_rule(world.get_location("Job: Plumbing"), HasAny(KAPOW_Unlock, FT_Unlock, A17_Unlock) & Has("Progressive Strength", items_for_40_strength) & Has("Progressive Intellect", items_for_40_intellect))
-    #
-    # if world.options.area_17 or world.options.uss_anomaly:
-    #     items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
-    #     items_for_80_intellect = get_items_required_for_stat_value(world, "Intellect", 80)
-    #     world.set_rule(world.get_location("Job: Engineering"), HasAny(A17_Unlock, USSA_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_80_intellect))
-    #
-    # if world.options.kapow_camp or world.options.uss_anomaly:
-    #     items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
-    #     items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
-    #     world.set_rule(world.get_location("Job: Kitchen"), HasAny(KAPOW_Unlock, USSA_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_40_intellect))
-    #     items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
-    #     world.set_rule(world.get_location("Job: Farming"), HasAny(KAPOW_Unlock, USSA_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_30_intellect))
-    #
-    # if world.options.center_perks or world.options.rattlesnake_springs or world.options.area_17:
-    #     items_for_60_strength = get_items_required_for_stat_value(world, "Strength", 60)
-    #     items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
-    #     world.set_rule(world.get_location("Job: Waste Disposal"), HasAny(CP2_Unlock, RSS_Unlock, A17_Unlock) & Has("Progressive Strength", items_for_60_strength) & Has("Progressive Intellect", items_for_30_intellect))
-    #
-    # if world.options.center_perks or world.options.kapow_camp:
-    #     items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
-    #     items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
-    #     world.set_rule(world.get_location("Job: Mail Sorting"), HasAny(CP2_Unlock, KAPOW_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_40_intellect))
-    #
-    # if world.options.hmp_offshore or world.options.fort_tundra:
-    #     items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
-    #     items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
-    #     world.set_rule(world.get_location("Job: Canine Carer"), HasAny(HMPOFF_Unlock, FT_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_30_intellect))
-    #
-    # if world.options.center_perks or world.options.rattlesnake_springs or world.options.fort_tundra:
-    #     items_for_40_strength = get_items_required_for_stat_value(world, "Strength", 40)
-    #     items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
-    #     world.set_rule(world.get_location("Job: Painting"), HasAny(CP2_Unlock, RSS_Unlock, FT_Unlock) & Has("Progressive Strength", items_for_40_strength) & Has("Progressive Intellect", items_for_30_intellect))
+#    logging.warning("Job locations currently disabled for fuzz testing. Please notify the dev (BigCelery842906) if you get this notification")
+    if world.options.rattlesnake_springs or world.options.hmp_offshore:
+        items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
+        items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
+        world.set_rule(world.get_location("Job: Woodwork"), HasAny(RSS_Unlock, HMPOFF_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_40_intellect))
+
+    if world.options.center_perks or world.options.rattlesnake_springs:
+        items_for_40_strength = get_items_required_for_stat_value(world, "Strength", 40)
+        items_for_80_intellect = get_items_required_for_stat_value(world, "Intellect", 80)
+        world.set_rule(world.get_location("Job: Shoemaker"), HasAny(CP2_Unlock, RSS_Unlock) & Has("Progressive Strength", items_for_40_strength) & Has("Progressive Intellect", items_for_80_intellect))
+
+    if world.options.hmp_offshore or world.options.fort_tundra or world.options.area_17:
+        items_for_50_strength = get_items_required_for_stat_value(world, "Strength", 50)
+        items_for_80_intellect = get_items_required_for_stat_value(world, "Intellect", 80)
+        world.set_rule(world.get_location("Job: Blacksmith"), HasAny(HMPOFF_Unlock, FT_Unlock, A17_Unlock) & Has("Progressive Strength", items_for_50_strength) & Has("Progressive Intellect", items_for_80_intellect))
+
+    if world.options.hmp_offshore or world.options.uss_anomaly:
+        items_for_70_strength = get_items_required_for_stat_value(world, "Strength", 70)
+        items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
+        world.set_rule(world.get_location("Job: Mining"), HasAny(HMPOFF_Unlock, USSA_Unlock) & Has("Progressive Strength", items_for_70_strength) & Has("Progressive Intellect", items_for_50_intellect))
+
+    if world.options.kapow_camp or world.options.fort_tundra or world.options.area_17:
+        items_for_40_strength = get_items_required_for_stat_value(world, "Strength", 40)
+        items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
+        world.set_rule(world.get_location("Job: Plumbing"), HasAny(KAPOW_Unlock, FT_Unlock, A17_Unlock) & Has("Progressive Strength", items_for_40_strength) & Has("Progressive Intellect", items_for_40_intellect))
+
+    if world.options.area_17 or world.options.uss_anomaly:
+        items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
+        items_for_80_intellect = get_items_required_for_stat_value(world, "Intellect", 80)
+        world.set_rule(world.get_location("Job: Engineering"), HasAny(A17_Unlock, USSA_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_80_intellect))
+
+    if world.options.kapow_camp or world.options.uss_anomaly:
+        items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
+        items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
+        world.set_rule(world.get_location("Job: Kitchen"), HasAny(KAPOW_Unlock, USSA_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_40_intellect))
+        items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
+        world.set_rule(world.get_location("Job: Farming"), HasAny(KAPOW_Unlock, USSA_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_30_intellect))
+
+    if world.options.center_perks or world.options.rattlesnake_springs or world.options.area_17:
+        items_for_60_strength = get_items_required_for_stat_value(world, "Strength", 60)
+        items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
+        world.set_rule(world.get_location("Job: Waste Disposal"), HasAny(CP2_Unlock, RSS_Unlock, A17_Unlock) & Has("Progressive Strength", items_for_60_strength) & Has("Progressive Intellect", items_for_30_intellect))
+
+    if world.options.center_perks or world.options.kapow_camp:
+        items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
+        items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
+        world.set_rule(world.get_location("Job: Mail Sorting"), HasAny(CP2_Unlock, KAPOW_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_40_intellect))
+
+    if world.options.hmp_offshore or world.options.fort_tundra:
+        items_for_30_strength = get_items_required_for_stat_value(world, "Strength", 30)
+        items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
+        world.set_rule(world.get_location("Job: Canine Carer"), HasAny(HMPOFF_Unlock, FT_Unlock) & Has("Progressive Strength", items_for_30_strength) & Has("Progressive Intellect", items_for_30_intellect))
+
+    if world.options.center_perks or world.options.rattlesnake_springs or world.options.fort_tundra:
+        items_for_40_strength = get_items_required_for_stat_value(world, "Strength", 40)
+        items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
+        world.set_rule(world.get_location("Job: Painting"), HasAny(CP2_Unlock, RSS_Unlock, FT_Unlock) & Has("Progressive Strength", items_for_40_strength) & Has("Progressive Intellect", items_for_30_intellect))
 
 def set_completion_condition(world: TheEscapists2World) -> None:
     yaml_unique_escapes_required = int(world.options.unique_escapes_required)

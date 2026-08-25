@@ -366,41 +366,41 @@ def create_regular_locations(world: TheEscapists2World) -> None:
 
     #Jobs
     temp_locations = []
-    # if world.options.rattlesnake_springs or world.options.hmp_offshore:
-    #     temp_locations.append("Job: Woodwork")
-    # if world.options.center_perks or world.options.rattlesnake_springs:
-    #     temp_locations.append("Job: Shoemaker")
-    # if  world.options.hmp_offshore or world.options.fort_tundra or world.options.area_17:
-    #     temp_locations.append("Job: Blacksmith")
-    # if world.options.hmp_offshore or world.options.uss_anomaly:
-    #     temp_locations.append("Job: Mining")
-    # if world.options.kapow_camp or world.options.fort_tundra or world.options.area_17:
-    #     temp_locations.append("Job: Plumbing")
-    # if world.options.area_17 or world.options.uss_anomaly:
-    #     temp_locations.append("Job: Engineering")
-    # if world.options.kapow_camp or world.options.uss_anomaly:
-    #     temp_locations.append("Job: Kitchen")
-    #     temp_locations.append("Job: Farming")
-    # if world.options.center_perks or world.options.rattlesnake_springs or world.options.area_17:
-    #     temp_locations.append("Job: Waste Disposal")
-    # if world.options.center_perks or world.options.kapow_camp:
-    #     temp_locations.append("Job: Mail Sorting")
-    # if world.options.hmp_offshore or world.options.fort_tundra:
-    #     temp_locations.append("Job: Canine Carer")
-    # if world.options.center_perks or world.options.rattlesnake_springs or world.options.fort_tundra:
-    #     temp_locations.append("Job: Painting")
-    # global_region_locations = get_location_names_with_ids(temp_locations)
-    # global_region.add_locations(global_region_locations)
+    if world.options.rattlesnake_springs or world.options.hmp_offshore:
+        temp_locations.append("Job: Woodwork")
+    if world.options.center_perks or world.options.rattlesnake_springs:
+        temp_locations.append("Job: Shoemaker")
+    if  world.options.hmp_offshore or world.options.fort_tundra or world.options.area_17:
+        temp_locations.append("Job: Blacksmith")
+    if world.options.hmp_offshore or world.options.uss_anomaly:
+        temp_locations.append("Job: Mining")
+    if world.options.kapow_camp or world.options.fort_tundra or world.options.area_17:
+        temp_locations.append("Job: Plumbing")
+    if world.options.area_17 or world.options.uss_anomaly:
+        temp_locations.append("Job: Engineering")
+    if world.options.kapow_camp or world.options.uss_anomaly:
+        temp_locations.append("Job: Kitchen")
+        temp_locations.append("Job: Farming")
+    if world.options.center_perks or world.options.rattlesnake_springs or world.options.area_17:
+        temp_locations.append("Job: Waste Disposal")
+    if world.options.center_perks or world.options.kapow_camp:
+        temp_locations.append("Job: Mail Sorting")
+    if world.options.hmp_offshore or world.options.fort_tundra:
+        temp_locations.append("Job: Canine Carer")
+    if world.options.center_perks or world.options.rattlesnake_springs or world.options.fort_tundra:
+        temp_locations.append("Job: Painting")
+    global_region_locations = get_location_names_with_ids(temp_locations)
+    global_region.add_locations(global_region_locations)
 
-    #Crafting
-    #global_region_locations = get_location_names_with_ids(["Craft: Tool Handle",
+    # Crafting
+    # global_region_locations = get_location_names_with_ids(["Craft: Tool Handle",
     #                                                       "Craft: Flimsy Pickaxe",
     #                                                       "Craft: Flimsy Shovel",
     #                                                       "Craft: Flimsy Cutters",
     #                                                       "Craft: Fake Wall Block",
     #                                                       "Craft: Contraband Pouch",
     #                                                       "Craft: Bed Dummy"])
-    #global_region.add_locations(global_region_locations)
+    # global_region.add_locations(global_region_locations)
 
     #Prison Specific Checks
     if world.options.center_perks:
