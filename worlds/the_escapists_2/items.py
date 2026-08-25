@@ -13,12 +13,14 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Fake Audio Equipment": 1,
     "Blueprint: Civilian Clothes": 2,
 
-    "Blueprint: Fake Carrot": 3,
+    "Blueprint: Pretend Carrot": 3,
     "Blueprint: Grappling Hook": 4,
     "Blueprint: Complete Crossbow": 5,
     "Blueprint: Makeshift Rocket Thruster": 6,
     "Blueprint: Makeshift Ladder": 7,
-    "Blueprint: Makeshift Breathing Apparatus": 8,
+    "Blueprint: Fishing Rod": 52,
+    "Blueprint: Cake": 53, #NOT CURRENTLY IMPLEMENTED DUE TO USE IN FAVOURS (REF WIKI)
+    "Blueprint: Breathable Trash Bag": 8,
     "Blueprint: Bed Dummy": 9,
     "Blueprint: Guard Outfit": 10,
     "Blueprint: Security Pass": 11,
@@ -29,6 +31,9 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Makeshift Harness": 16,
     "Blueprint: Parachute": 17,
     "Blueprint: Lightweight Cutters": 18,
+    "Blueprint: Contraband Pouch": 39,
+    "Blueprint: Makeshift Breathing Apparatus": 54,
+
     # --- PRISON UNLOCKS
     "Center Perks 2.0 Prison Unlock": 19,
     "Rattlesnake Springs Prison Unlock": 20,
@@ -53,7 +58,7 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Flimsy Shovel": 36,
     "Blueprint: Lightweight Shovel": 37,
     "Blueprint: Sturdy Shovel": 38,
-    "Blueprint: Contraband Pouch": 39,
+
     "Blueprint: Durable Contraband Pouch": 40,
     "Blueprint: Fake Wall Block": 41,
     "Blueprint: Fake Vent Cover": 42,
@@ -71,7 +76,6 @@ ITEM_NAME_TO_ID = {
     "Progressive Strength": 235,
     "Progressive Stamina": 236,
     "Progressive Intellect": 237,
-    # "Unique Escapes": 238,
 
     # --- TRAPS - Starting from 240
     "Max Heat Trap": 240,
@@ -120,7 +124,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Fake Audio Equipment": ItemClassification.progression,
     "Blueprint: Civilian Clothes": ItemClassification.progression,
 
-    "Blueprint: Fake Carrot": ItemClassification.progression,
+    "Blueprint: Pretend Carrot": ItemClassification.progression,
     "Blueprint: Grappling Hook": ItemClassification.progression,
 
     "Blueprint: Complete Crossbow": ItemClassification.progression,
@@ -128,7 +132,10 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Makeshift Rocket Thruster": ItemClassification.progression,
     "Blueprint: Makeshift Ladder": ItemClassification.progression,
 
-    "Blueprint: Makeshift Breathing Apparatus": ItemClassification.progression,
+    "Blueprint: Fishing Rod": ItemClassification.progression,
+    "Blueprint: Cake": ItemClassification.progression,
+
+    "Blueprint: Breathable Trash Bag": ItemClassification.progression,
 
     "Blueprint: Bed Dummy": ItemClassification.progression,
     "Blueprint: Guard Outfit": ItemClassification.progression,
@@ -141,6 +148,8 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Makeshift Harness": ItemClassification.progression,
     "Blueprint: Parachute": ItemClassification.progression,
     "Blueprint: Lightweight Cutters": ItemClassification.progression,
+    "Blueprint: Contraband Pouch": ItemClassification.progression,
+    "Blueprint: Makeshift Breathing Apparatus": ItemClassification.progression,
 
     # --- PRISON UNLOCKS
     "Center Perks 2.0 Prison Unlock": ItemClassification.progression,
@@ -159,18 +168,21 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Progressive Stamina": ItemClassification.progression,
     "Progressive Intellect": ItemClassification.progression,
 
+    # --- TOOL BLUEPRINTS
+    "Blueprint: Multitool": ItemClassification.progression,
+    "Blueprint: Flimsy Pickaxe": ItemClassification.progression,
+    "Blueprint: Lightweight Pickaxe": ItemClassification.progression,
+    "Blueprint: Sturdy Pickaxe": ItemClassification.progression,
+    "Blueprint: Flimsy Cutters": ItemClassification.progression,
+    "Blueprint: Sturdy Cutters": ItemClassification.progression,
+    "Blueprint: Flimsy Shovel": ItemClassification.progression,
+    "Blueprint: Lightweight Shovel": ItemClassification.progression,
+    "Blueprint: Sturdy Shovel": ItemClassification.progression,
+
     # --- USEFUL ITEMS
-    "Blueprint: Multitool": ItemClassification.useful,
+
     "Blueprint: Tool Handle": ItemClassification.useful,
-    "Blueprint: Flimsy Pickaxe": ItemClassification.useful,
-    "Blueprint: Lightweight Pickaxe": ItemClassification.useful,
-    "Blueprint: Sturdy Pickaxe": ItemClassification.useful,
-    "Blueprint: Flimsy Cutters": ItemClassification.useful,
-    "Blueprint: Sturdy Cutters": ItemClassification.useful,
-    "Blueprint: Flimsy Shovel": ItemClassification.useful,
-    "Blueprint: Lightweight Shovel": ItemClassification.useful,
-    "Blueprint: Sturdy Shovel": ItemClassification.useful,
-    "Blueprint: Contraband Pouch": ItemClassification.useful,
+
     "Blueprint: Durable Contraband Pouch": ItemClassification.useful,
     "Blueprint: Fake Wall Block": ItemClassification.useful,
     "Blueprint: Fake Vent Cover": ItemClassification.useful,
@@ -223,18 +235,21 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
 }
 fillerItems = []
 trapItems = []
+usefulItems = []
+perimeter_escape_items = ["Blueprint: Multitool", "Blueprint: Flimsy Pickaxe", "Blueprint: Lightweight Pickaxe", "Blueprint: Sturdy Pickaxe", "Blueprint: Flimsy Cutters", "Blueprint: Sturdy Cutters", "Blueprint: Flimsy Shovel", "Blueprint: Lightweight Shovel", "Blueprint: Sturdy Shovel",]
 for item in DEFAULT_ITEM_CLASSIFICATIONS:
     if DEFAULT_ITEM_CLASSIFICATIONS[item] == ItemClassification.filler:
         fillerItems.append(item)
     if DEFAULT_ITEM_CLASSIFICATIONS[item] == ItemClassification.trap:
         trapItems.append(item)
+    if DEFAULT_ITEM_CLASSIFICATIONS[item] == ItemClassification.useful:
+        usefulItems.append(item)
 
 class TheEscapists2Item(Item):
     game = "The Escapists 2"
 
 def get_random_filler_item_name(world: TheEscapists2World) -> str:
 
-    #TODO: Actually set these as random
     if world.random.randint(0, 99) < world.options.trap_chance:
         trapItem = trapItems[world.random.randint(0, len(trapItems) -1)]
         return trapItem
@@ -249,69 +264,78 @@ def create_item_with_correct_classification(world: TheEscapists2World, name: str
 
 def create_all_items(world: TheEscapists2World) -> None:
 
+#TODO: CHECK THESE PER PRISON - SOME SHOULD BE MADE IN MULTIPLE PRISONS (KEYS SPECIFICALLY)
     itempool: list[Item] = []
     validPrisonUnlocks = []
+    need_red_key = False
+    need_cyan_key = False
 
     if world.options.center_perks:
         validPrisonUnlocks.append("Center Perks 2.0 Prison Unlock")
-        itempool.append(world.create_item("Center Perks 2.0 Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Fake Audio Equipment"))
         itempool.append(world.create_item("Blueprint: Civilian Clothes"))
 
     if world.options.rattlesnake_springs:
         validPrisonUnlocks.append("Rattlesnake Springs Prison Unlock")
-        itempool.append(world.create_item("Rattlesnake Springs Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Complete Crossbow"))
+        need_red_key = True
 
     if world.options.kapow_camp:
         validPrisonUnlocks.append("K.A.P.O.W Camp Prison Unlock")
-        itempool.append(world.create_item( "K.A.P.O.W Camp Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Makeshift Rocket Thruster"))
         itempool.append(world.create_item("Blueprint: Makeshift Ladder"))
 
     if world.options.hmp_offshore:
         validPrisonUnlocks.append("H.M.P. Offshore Prison Unlock")
-        itempool.append(world.create_item("H.M.P. Offshore Prison Unlock"))
+        itempool.append(world.create_item("Blueprint: Fishing Rod"))
+        itempool.append(world.create_item("Blueprint: Breathable Trash Bag"))
+        need_red_key = True
 
     if world.options.fort_tundra:
         validPrisonUnlocks.append("Fort Tundra Prison Unlock")
-        itempool.append(world.create_item("Fort Tundra Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Bed Dummy"))
         itempool.append(world.create_item("Blueprint: Guard Outfit"))
 
     if world.options.area_17:
         validPrisonUnlocks.append("Area 17 Prison Unlock")
-        itempool.append(world.create_item("Area 17 Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Security Pass"))
-        itempool.append(world.create_item("Blueprint: Plastic Red Key"))
-        itempool.append(world.create_item("Blueprint: Plastic Cyan Key"))
-        itempool.append(world.create_item("Blueprint: Key Mould Red"))
-        itempool.append(world.create_item("Blueprint: Key Mould Cyan"))
+        need_red_key = True
+        need_cyan_key = True
 
     if world.options.uss_anomaly:
         validPrisonUnlocks.append("U.S.S. Anomaly Prison Unlock")
-        itempool.append(world.create_item("U.S.S. Anomaly Prison Unlock"))
+        #Contraband Pouch required but should be in pool regardless - Hence being sat just outside this loop
+        need_red_key = True
+
+    itempool.append(world.create_item("Blueprint: Contraband Pouch"))
+
+    if len(validPrisonUnlocks) != 0:
+        for item in perimeter_escape_items:
+            itempool.append(world.create_item(item))
 
     if world.options.cougar_creek_railroad:
         validPrisonUnlocks.append("Cougar Creek Railroad Prison Unlock")
-        itempool.append(world.create_item("Cougar Creek Railroad Prison Unlock"))
-        itempool.append(world.create_item("Blueprint: Fake Carrot"))
+        itempool.append(world.create_item("Blueprint: Pretend Carrot"))
         itempool.append(world.create_item("Blueprint: Grappling Hook"))
 
     if world.options.hms_orca:
         validPrisonUnlocks.append("H.M.S. Orca Prison Unlock")
-        itempool.append(world.create_item("H.M.S. Orca Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Makeshift Breathing Apparatus"))
 
     if world.options.air_force_con:
         validPrisonUnlocks.append("Air Force Con Prison Unlock")
-        itempool.append(world.create_item("Air Force Con Prison Unlock"))
         itempool.append(world.create_item("Blueprint: Makeshift Harness"))
         itempool.append(world.create_item("Blueprint: Parachute"))
 
     if len(validPrisonUnlocks) == 0:
         raise OptionError("No prisons have been enabled. You must enable at least one prison")
 
+    random_prison_unlock_value = world.random.randint(0, len(validPrisonUnlocks) - 1)
+    starting_prison_unlock = world.create_item(validPrisonUnlocks[random_prison_unlock_value])
+    validPrisonUnlocks.remove(validPrisonUnlocks[random_prison_unlock_value])
+
+    for prisonUnlock in validPrisonUnlocks:
+        itempool.append(world.create_item(prisonUnlock))
     # Stats
     increment = world.options.strength_step
     for i in range(30, 100, increment):
@@ -325,6 +349,17 @@ def create_all_items(world: TheEscapists2World) -> None:
     for i in range(30, 100, increment):
         itempool.append(world.create_item("Progressive Intellect"))
 
+    if need_red_key:
+        itempool.append(world.create_item("Blueprint: Plastic Red Key"))
+        itempool.append(world.create_item("Blueprint: Key Mould Red"))
+
+    if need_cyan_key:
+        itempool.append(world.create_item("Blueprint: Plastic Cyan Key"))
+        itempool.append(world.create_item("Blueprint: Key Mould Cyan"))
+
+    for item in usefulItems:
+        itempool.append(world.create_item(item))
+
     number_of_items = len(itempool)
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
     needed_number_of_filler_items = number_of_unfilled_locations - number_of_items
@@ -333,5 +368,4 @@ def create_all_items(world: TheEscapists2World) -> None:
 
     world.multiworld.itempool += itempool
 
-    starting_prison_unlock = world.create_item(validPrisonUnlocks[world.random.randint(0, len(validPrisonUnlocks) - 1)])
     world.push_precollected(starting_prison_unlock)
