@@ -27,10 +27,25 @@ CCR_Unlock = "Cougar Creek Railroad Prison Unlock"
 HMSO_Unlock = "H.M.S. Orca Prison Unlock"
 AFC_Unlock = "Air Force Con Prison Unlock"
 
-CAN_DO_CHIP = HasAny("Blueprint: Flimsy Pickaxe", "Blueprint: Flimsy Shovel", "Blueprint: Lightweight Pickaxe", "Blueprint: Lightweight Shovel", "Blueprint: Sturdy Pickaxe", "Blueprint: Sturdy Shovel", "Blueprint: Multitool")
-CAN_DO_CUT = HasAny("Blueprint: Flimsy Cutters", "Blueprint: Lightweight Cutters", "Blueprint: Sturdy Cutters")
-CAN_DO_DIG = HasAny("Blueprint: Flimsy Shovel", "Blueprint: Flimsy Pickaxe", "Blueprint: Lightweight Shovel", "Blueprint: Lightweight Pickaxe", "Blueprint: Sturdy Shovel", "Blueprint: Sturdy Pickaxe", "Blueprint: Multitool")
-CAN_DO_PERIMETER_BREAKOUT = (CAN_DO_CHIP | CAN_DO_CUT | CAN_DO_DIG)
+def can_do_perimeter_breakout(world: TheEscapists2World) -> Has:
+    items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
+    items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
+    items_for_60_intellect = get_items_required_for_stat_value(world, "Intellect", 60)
+    items_for_70_intellect = get_items_required_for_stat_value(world, "Intellect", 70)
+
+    CAN_DO_CHIP = (Has("Blueprint: Flimsy Pickaxe") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Flimsy Shovel") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Lightweight Pickaxe") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Lightweight Shovel") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Sturdy Pickaxe") & Has("Progressive Intellect", items_for_60_intellect)) | (Has( "Blueprint: Sturdy Shovel") & Has("Progressive Intellect", items_for_60_intellect)) | (Has( "Blueprint: Multitool") & Has("Progressive Intellect", items_for_70_intellect))
+    CAN_DO_CUT = (Has("Blueprint: Flimsy Cutters") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Lightweight Cutters") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Sturdy Cutters") & Has("Progressive Intellect", items_for_60_intellect))
+    CAN_DO_DIG = (Has("Blueprint: Flimsy Shovel") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Flimsy Pickaxe") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Lightweight Shovel") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Lightweight Pickaxe") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Sturdy Shovel") & Has("Progressive Intellect", items_for_60_intellect)) | (Has( "Blueprint: Sturdy Pickaxe") & Has("Progressive Intellect", items_for_60_intellect)) | (Has( "Blueprint: Multitool") & Has("Progressive Intellect", items_for_70_intellect))
+    can_do_perimeter = CAN_DO_CHIP | CAN_DO_CUT | CAN_DO_DIG
+    return can_do_perimeter
+
+def can_do_cut(world: TheEscapists2World) -> Has:
+    items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
+    items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
+    items_for_60_intellect = get_items_required_for_stat_value(world, "Intellect", 60)
+
+    CAN_DO_CUT = (Has("Blueprint: Flimsy Cutters") & Has("Progressive Intellect", items_for_40_intellect)) | (Has("Blueprint: Lightweight Cutters") & Has("Progressive Intellect", items_for_50_intellect)) | (Has("Blueprint: Sturdy Cutters") & Has("Progressive Intellect", items_for_60_intellect))
+    return CAN_DO_CUT
 
 #TODO: CHECK IF REQUIRED BEFORE RELEASE
 def get_current_stat_value(world: TheEscapists2World, state: CollectionState, stat_to_check) -> None:
@@ -82,8 +97,8 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_center_perks, Has(CP2_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("CP2.0 PE"), CAN_DO_PERIMETER_BREAKOUT)
-        world.set_rule(world.get_location("Escape: Perimeter Breakout (Center Perks 2.0)"), CAN_DO_PERIMETER_BREAKOUT)
+        world.set_rule(world.get_location("CP2.0 PE"), can_do_perimeter_breakout(world))
+        world.set_rule(world.get_location("Escape: Perimeter Breakout (Center Perks 2.0)"), can_do_perimeter_breakout(world))
 
         items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
         world.set_rule(world.get_location("Escape: Meet the Crew (Center Perks 2.0)"), Has("Blueprint: Civilian Clothes") & Has("Blueprint: Fake Audio Equipment") & Has("Progressive Intellect", items_for_50_intellect))
@@ -95,8 +110,8 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_rattlesnake_springs, Has(RSS_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("Escape: Perimeter Breakout (Rattlesnake Springs)"), CAN_DO_PERIMETER_BREAKOUT)
-        world.set_rule(world.get_location("RSS PE"), CAN_DO_PERIMETER_BREAKOUT)
+        world.set_rule(world.get_location("Escape: Perimeter Breakout (Rattlesnake Springs)"), can_do_perimeter_breakout(world))
+        world.set_rule(world.get_location("RSS PE"), can_do_perimeter_breakout(world))
 
         items_for_70_intellect = get_items_required_for_stat_value(world, "Intellect", 70)
         world.set_rule(world.get_location("Escape: Zip It Up (Rattlesnake Springs)"), Has("Blueprint: Complete Crossbow") & Has("Blueprint: Key Mould Red") & Has("Blueprint: Plastic Red Key") & Has("Progressive Intellect", items_for_70_intellect))
@@ -107,8 +122,8 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_kapow_camp, Has(KAPOW_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("Escape: Perimeter Breakout (K.A.P.O.W Camp)"), CAN_DO_PERIMETER_BREAKOUT)
-        world.set_rule(world.get_location("KAPOW PE"), CAN_DO_PERIMETER_BREAKOUT)
+        world.set_rule(world.get_location("Escape: Perimeter Breakout (K.A.P.O.W Camp)"), can_do_perimeter_breakout(world))
+        world.set_rule(world.get_location("KAPOW PE"), can_do_perimeter_breakout(world))
 
         items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
         world.set_rule(world.get_location("Escape: Speed McQueen (K.A.P.O.W Camp)"), Has("Progressive Intellect", items_for_40_intellect) & Has("Blueprint: Makeshift Rocket Thruster") & Has("Blueprint: Makeshift Ladder"))
@@ -119,8 +134,8 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_hmp_offshore, Has(HMPOFF_Unlock))
         max_escapes_possible += 3
 
-        world.set_rule(world.get_location("Escape: Perimeter Breakout (H.M.P. Offshore)"), CAN_DO_PERIMETER_BREAKOUT)
-        world.set_rule(world.get_location("HMPOff PE"), CAN_DO_PERIMETER_BREAKOUT)
+        world.set_rule(world.get_location("Escape: Perimeter Breakout (H.M.P. Offshore)"), can_do_perimeter_breakout(world))
+        world.set_rule(world.get_location("HMPOff PE"), can_do_perimeter_breakout(world))
 
         items_for_70_intellect = get_items_required_for_stat_value(world, "Intellect", 70)
         world.set_rule(world.get_location("Escape: Swimming With Dolphins  (H.M.P. Offshore)"), Has("Progressive Intellect", items_for_70_intellect) & Has("Blueprint: Fishing Rod") & Has("Blueprint: Key Mould Red") & Has("Blueprint: Plastic Red Key"))
@@ -135,19 +150,20 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_fort_tundra, Has(FT_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("Escape: Perimeter Breakout (Fort Tundra)"), CAN_DO_PERIMETER_BREAKOUT)
-        world.set_rule(world.get_location("FT PE"), CAN_DO_PERIMETER_BREAKOUT)
+        world.set_rule(world.get_location("Escape: Perimeter Breakout (Fort Tundra)"), can_do_perimeter_breakout(world))
+        world.set_rule(world.get_location("FT PE"), can_do_perimeter_breakout(world))
 
-        world.set_rule(world.get_location("Escape: Rock-hammer Hard Place (Fort Tundra)"), CAN_DO_CUT)
-        world.set_rule(world.get_location("FT RHHP"), CAN_DO_CUT) #The Rock Hammer is acquired via a quest
+        items_for_70_intellect = get_items_required_for_stat_value(world, "Intellect", 70)
+        world.set_rule(world.get_location("Escape: Rock-hammer Hard Place (Fort Tundra)"), can_do_cut(world) & Has("Progressive Intellect", items_for_70_intellect))
+        world.set_rule(world.get_location("FT RHHP"), can_do_cut(world) & Has("Progressive Intellect", items_for_70_intellect)) #The Rock Hammer is acquired via a quest
 
     if world.options.area_17:
         to_area_17 = world.get_entrance("Menu to Area 17")
         world.set_rule(to_area_17, Has(A17_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("Escape: Perimeter Breakout (Area 17)"), CAN_DO_PERIMETER_BREAKOUT)
-        world.set_rule(world.get_location("A17 PE"), CAN_DO_PERIMETER_BREAKOUT)
+        world.set_rule(world.get_location("Escape: Perimeter Breakout (Area 17)"), can_do_perimeter_breakout(world))
+        world.set_rule(world.get_location("A17 PE"), can_do_perimeter_breakout(world))
 
         items_for_60_intellect = get_items_required_for_stat_value(world, "Intellect", 60)
         world.set_rule(world.get_location("Escape: I'm Only Human (Area 17)"), Has("Progressive Intellect", items_for_60_intellect) & Has("Blueprint: Security Pass") & Has("Blueprint: Plastic Red Key") & Has("Blueprint: Plastic Cyan Key") & Has("Blueprint: Key Mould Red") & Has("Blueprint: Key Mould Cyan"))
@@ -158,8 +174,8 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_uss_anomaly, Has(USSA_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("Escape: Perimeter Breakout (U.S.S. Anomaly)"), CAN_DO_PERIMETER_BREAKOUT)
-        world.set_rule(world.get_location("USSA PE"), CAN_DO_PERIMETER_BREAKOUT)
+        world.set_rule(world.get_location("Escape: Perimeter Breakout (U.S.S. Anomaly)"), can_do_perimeter_breakout(world))
+        world.set_rule(world.get_location("USSA PE"), can_do_perimeter_breakout(world))
 
         items_for_60_intellect = get_items_required_for_stat_value(world, "Intellect", 60)
         world.set_rule(world.get_location("Escape: Race From Space (U.S.S. Anomaly)"), Has("Progressive Intellect", items_for_60_intellect) & Has("Blueprint: Contraband Pouch") & Has("Blueprint: Key Mould Red") & Has("Blueprint: Plastic Red Key"))
