@@ -81,6 +81,9 @@ def get_items_required_for_stat_value(world: TheEscapists2World, stat_to_check, 
     else:
         raise KeyError("Stat Value check not valid, value provided did not match a stat type. Can't return the items required for this stat value.")
 
+    if option_step == 0:
+        return 0
+
     items_required = 0
     for i in range(30, 100, option_step):
         if i >= value_to_get:
@@ -101,8 +104,8 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(world.get_location("Escape: Perimeter Breakout (Center Perks 2.0)"), can_do_perimeter_breakout(world))
 
         items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
-        world.set_rule(world.get_location("Escape: Meet the Crew (Center Perks 2.0)"), Has("Blueprint: Civilian Clothes") & Has("Blueprint: Fake Audio Equipment") & Has("Progressive Intellect", items_for_50_intellect))
-        world.set_rule(world.get_location("CP2.0 MTC"), Has("Blueprint: Civilian Clothes") & Has("Blueprint: Fake Audio Equipment") & Has("Progressive Intellect", items_for_50_intellect))
+        world.set_rule(world.get_location("Escape: Meet the Crew (Center Perks 2.0)"), Has("Blueprint: Fake Audio Equipment") & Has("Progressive Intellect", items_for_50_intellect))
+        world.set_rule(world.get_location("CP2.0 MTC"), Has("Blueprint: Fake Audio Equipment") & Has("Progressive Intellect", items_for_50_intellect))
 
 
     if world.options.rattlesnake_springs:
@@ -186,19 +189,22 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_cougar_creek, Has(CCR_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("Escape: My Little Phoney (Cougar Creek Railroad)"), Has("Blueprint: Pretend Carrot"))
-        world.set_rule(world.get_location("CCR MLP"), Has("Blueprint: Pretend Carrot"))
+        items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
+        world.set_rule(world.get_location("Escape: My Little Phoney (Cougar Creek Railroad)"), Has("Blueprint: Pretend Carrot") & Has("Progressive Intellect", items_for_30_intellect))
+        world.set_rule(world.get_location("CCR MLP"), Has("Blueprint: Pretend Carrot") & Has("Progressive Intellect", items_for_30_intellect))
 
-        world.set_rule(world.get_location("Escape: Hooked On You (Cougar Creek Railroad)"), Has("Blueprint: Grappling Hook"))
-        world.set_rule(world.get_location("CCR HOY"), Has("Blueprint: Grappling Hook"))
+        items_for_70_intellect = get_items_required_for_stat_value(world, "Intellect", 70)
+        world.set_rule(world.get_location("Escape: Hooked On You (Cougar Creek Railroad)"), Has("Blueprint: Grappling Hook") & Has("Progressive Intellect", items_for_70_intellect))
+        world.set_rule(world.get_location("CCR HOY"), Has("Blueprint: Grappling Hook") & Has("Progressive Intellect", items_for_70_intellect))
 
     if world.options.hms_orca:
         to_hms_orca = world.get_entrance("Menu to HMS Orca")
         world.set_rule(to_hms_orca, Has(HMSO_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("Escape: Scuba Doo (H.M.S. Orca)"), Has("Blueprint: Makeshift Breathing Apparatus"))
-        world.set_rule(world.get_location("HMSO SD"), Has("Blueprint: Makeshift Breathing Apparatus"))
+        items_for_60_intellect = get_items_required_for_stat_value(world, "Intellect", 60)
+        world.set_rule(world.get_location("Escape: Scuba Doo (H.M.S. Orca)"), Has("Blueprint: Makeshift Breathing Apparatus") & Has("Progressive Intellect", items_for_60_intellect))
+        world.set_rule(world.get_location("HMSO SD"), Has("Blueprint: Makeshift Breathing Apparatus") & Has("Progressive Intellect", items_for_60_intellect))
 
         #Escape: Wave Goodbye only needs access to orca (Nothing needs to be crafted)
         #Which also means the event does not need a set rule
@@ -208,11 +214,13 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(to_air_force_con, Has(AFC_Unlock))
         max_escapes_possible += 2
 
-        world.set_rule(world.get_location("Escape: Plane Crazy (Air Force Con)"), Has("Blueprint: Makeshift Harness") & Has("Blueprint: Parachute"))
-        world.set_rule(world.get_location("AFC PC"), Has("Blueprint: Makeshift Harness") & Has("Blueprint: Parachute"))
+        items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
+        world.set_rule(world.get_location("Escape: Plane Crazy (Air Force Con)"), Has("Blueprint: Makeshift Harness") & Has("Blueprint: Parachute") & Has("Progressive Intellect", items_for_30_intellect))
+        world.set_rule(world.get_location("AFC PC"), Has("Blueprint: Makeshift Harness") & Has("Blueprint: Parachute") & Has("Progressive Intellect", items_for_30_intellect))
 
-        #Escape: Passport to Freedom only needs access to AFC (Nothing needs to be crafted)
-        #Which also means the event does not need a set rule
+        items_for_60_intellect = get_items_required_for_stat_value(world, "Intellect", 60)
+        world.set_rule(world.get_location("Escape: Passport To Freedom (Air Force Con)"), Has("Blueprint: Energy Module") & Has("Progressive Intellect", items_for_60_intellect))
+        world.set_rule(world.get_location("AFC PTF"), Has("Blueprint: Energy Module") & Has("Progressive Intellect", items_for_60_intellect))
 
 
 def set_all_location_rules(world: TheEscapists2World) -> None:
@@ -274,10 +282,36 @@ def set_all_location_rules(world: TheEscapists2World) -> None:
         items_for_30_intellect = get_items_required_for_stat_value(world, "Intellect", 30)
         world.set_rule(world.get_location("Job: Painting"), HasAny(CP2_Unlock, RSS_Unlock, FT_Unlock) & Has("Progressive Strength", items_for_40_strength) & Has("Progressive Intellect", items_for_30_intellect))
 
+    options = world.options
+    if options.center_perks or options.rattlesnake_springs or options.kapow_camp or options.hmp_offshore or options.fort_tundra or options.area_17 or options.uss_anomaly:
+        temp_locations = []
+
+        increment = world.options.strength_step
+        if increment != 0:
+            temp_locations.append("Strength Stat: Max")
+            for i in range(30, 100, increment):
+                temp_locations.append(f"Strength Stat: {i}")
+
+        increment = world.options.stamina_step
+        if increment != 0:
+            temp_locations.append("Stamina Stat: Max")
+            for i in range(30, 100, increment):
+                temp_locations.append(f"Stamina Stat: {i}")
+
+        increment = world.options.intellect_step
+        if increment != 0:
+            temp_locations.append("Intellect Stat: Max")
+            for i in range(30, 100, increment):
+                temp_locations.append(f"Intellect Stat: {i}")
+
+        for i in range(0, len(temp_locations)):
+            world.set_rule(world.get_location(temp_locations[i]), HasAny(CP2_Unlock, RSS_Unlock, KAPOW_Unlock, HMPOFF_Unlock, FT_Unlock, A17_Unlock, USSA_Unlock))
+
 def set_completion_condition(world: TheEscapists2World) -> None:
     yaml_unique_escapes_required = int(world.options.unique_escapes_required)
     if yaml_unique_escapes_required > max_escapes_possible:
         yaml_unique_escapes_required = max_escapes_possible
         logging.warning(f"The Escapists 2 - Slot {world.player_name} has too many required escapes, reducing to the max available given options provided (No action required)")
+        world.options.unique_escapes_required.value = yaml_unique_escapes_required
 
     world.set_completion_rule(Has("Unique Escapes", count = yaml_unique_escapes_required))

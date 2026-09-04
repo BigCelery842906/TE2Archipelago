@@ -11,7 +11,6 @@ if TYPE_CHECKING:
 ITEM_NAME_TO_ID = {
     # --- PROGRESSION ITEMS
     "Blueprint: Fake Audio Equipment": 1,
-    "Blueprint: Civilian Clothes": 2,
 
     "Blueprint: Pretend Carrot": 3,
     "Blueprint: Grappling Hook": 4,
@@ -33,6 +32,7 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Lightweight Cutters": 18,
     "Blueprint: Contraband Pouch": 39,
     "Blueprint: Makeshift Breathing Apparatus": 54,
+    "Blueprint: Energy Module": 55,
 
     # --- PRISON UNLOCKS
     "Center Perks 2.0 Prison Unlock": 19,
@@ -68,9 +68,9 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Super Knuckle Duster": 46,
     "Blueprint: Super Whip": 47,
     "Blueprint: Makeshift Stungun": 48,
-    "Blueprint: Gun Maker Kit": 49,
-    "Blueprint: Moulded Gun": 50,
-    "Blueprint: Fake Gun": 51,
+    #"Blueprint: Gun Maker Kit": 49, #NOT NEEDED UNTIL MULTIPLAYER
+    #"Blueprint: Moulded Gun": 50, #NOT NEEDED UNTIL MULTIPLAYER
+    #"Blueprint: Fake Gun": 51, #NOT NEEDED UNTIL MULTIPLAYER
 
     # --- PROGRESSIVE STATS - Start at 235
     "Progressive Strength": 235,
@@ -122,7 +122,6 @@ ITEM_NAME_TO_ID = {
 DEFAULT_ITEM_CLASSIFICATIONS = {
     # --- PROGRESSION ITEMS
     "Blueprint: Fake Audio Equipment": ItemClassification.progression,
-    "Blueprint: Civilian Clothes": ItemClassification.progression,
 
     "Blueprint: Pretend Carrot": ItemClassification.progression,
     "Blueprint: Grappling Hook": ItemClassification.progression,
@@ -150,6 +149,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Lightweight Cutters": ItemClassification.progression,
     "Blueprint: Contraband Pouch": ItemClassification.progression,
     "Blueprint: Makeshift Breathing Apparatus": ItemClassification.progression,
+    "Blueprint: Energy Module": ItemClassification.progression,
 
     # --- PRISON UNLOCKS
     "Center Perks 2.0 Prison Unlock": ItemClassification.progression,
@@ -192,9 +192,9 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Super Knuckle Duster": ItemClassification.useful,
     "Blueprint: Super Whip": ItemClassification.useful,
     "Blueprint: Makeshift Stungun": ItemClassification.useful,
-    "Blueprint: Gun Maker Kit": ItemClassification.useful,
-    "Blueprint: Moulded Gun": ItemClassification.useful,
-    "Blueprint: Fake Gun": ItemClassification.useful,
+    #"Blueprint: Gun Maker Kit": ItemClassification.useful,
+    #"Blueprint: Moulded Gun": ItemClassification.useful,
+    #"Blueprint: Fake Gun": ItemClassification.useful,
 
     # --- TRAPS
     "Max Heat Trap": ItemClassification.trap,
@@ -270,10 +270,11 @@ def create_all_items(world: TheEscapists2World) -> None:
     need_red_key = False
     need_cyan_key = False
 
+    generate_Stats = False
+
     if world.options.center_perks:
         validPrisonUnlocks.append("Center Perks 2.0 Prison Unlock")
         itempool.append(world.create_item("Blueprint: Fake Audio Equipment"))
-        itempool.append(world.create_item("Blueprint: Civilian Clothes"))
 
     if world.options.rattlesnake_springs:
         validPrisonUnlocks.append("Rattlesnake Springs Prison Unlock")
@@ -310,6 +311,7 @@ def create_all_items(world: TheEscapists2World) -> None:
     itempool.append(world.create_item("Blueprint: Contraband Pouch"))
 
     if len(validPrisonUnlocks) != 0:
+        generate_Stats = True
         for item in perimeter_escape_items:
             itempool.append(world.create_item(item))
 
@@ -326,6 +328,7 @@ def create_all_items(world: TheEscapists2World) -> None:
         validPrisonUnlocks.append("Air Force Con Prison Unlock")
         itempool.append(world.create_item("Blueprint: Makeshift Harness"))
         itempool.append(world.create_item("Blueprint: Parachute"))
+        itempool.append(world.create_item("Blueprint: Energy Module"))
 
     if len(validPrisonUnlocks) == 0:
         raise OptionError("No prisons have been enabled. You must enable at least one prison")
@@ -336,18 +339,27 @@ def create_all_items(world: TheEscapists2World) -> None:
 
     for prisonUnlock in validPrisonUnlocks:
         itempool.append(world.create_item(prisonUnlock))
+
     # Stats
-    increment = world.options.strength_step
-    for i in range(30, 100, increment):
-        itempool.append(world.create_item("Progressive Strength"))
+    if generate_Stats:
+        increment = world.options.strength_step
+        if world.options.strength_step != 0:
+            for i in range(30, 100, increment):
+                itempool.append(world.create_item("Progressive Strength"))
 
-    increment = world.options.stamina_step
-    for i in range(30, 100, increment):
-        itempool.append(world.create_item("Progressive Stamina"))
+        increment = world.options.stamina_step
+        if world.options.stamina_step != 0:
+            for i in range(30, 100, increment):
+                itempool.append(world.create_item("Progressive Stamina"))
 
-    increment = world.options.intellect_step
-    for i in range(30, 100, increment):
-        itempool.append(world.create_item("Progressive Intellect"))
+        increment = world.options.intellect_step
+        if world.options.intellect_step != 0:
+            for i in range(30, 100, increment):
+                itempool.append(world.create_item("Progressive Intellect"))
+    else:
+        world.options.strength_step.value = 0
+        world.options.stamina_step.value = 0
+        world.options.intellect_step.value = 0
 
     if need_red_key:
         itempool.append(world.create_item("Blueprint: Plastic Red Key"))

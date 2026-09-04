@@ -347,22 +347,31 @@ def create_regular_locations(world: TheEscapists2World) -> None:
     global_region = world.get_region("Global")
 
     #Stats
+    options = world.options
 
-    increment = world.options.strength_step
-    temp_locations = ["Strength Stat: Max", "Stamina Stat: Max", "Intellect Stat: Max"]
-    for i in range(30, 100, increment):
-        temp_locations.append(f"Strength Stat: {i}")
+    if options.center_perks or options.rattlesnake_springs or options.kapow_camp or options.hmp_offshore or options.fort_tundra or options.area_17 or options.uss_anomaly:
+        temp_locations = []
 
-    increment = world.options.stamina_step
-    for i in range(30, 100, increment):
-        temp_locations.append(f"Stamina Stat: {i}")
+        increment = world.options.strength_step
+        if increment != 0:
+            temp_locations.append("Strength Stat: Max")
+            for i in range(30, 100, increment):
+                temp_locations.append(f"Strength Stat: {i}")
 
-    increment = world.options.intellect_step
-    for i in range(30, 100, increment):
-        temp_locations.append(f"Intellect Stat: {i}")
+        increment = world.options.stamina_step
+        if increment != 0:
+            temp_locations.append("Stamina Stat: Max")
+            for i in range(30, 100, increment):
+                temp_locations.append(f"Stamina Stat: {i}")
 
-    global_region_locations = get_location_names_with_ids(temp_locations)
-    global_region.add_locations(global_region_locations)
+        increment = world.options.intellect_step
+        if increment != 0:
+            temp_locations.append("Intellect Stat: Max")
+            for i in range(30, 100, increment):
+                temp_locations.append(f"Intellect Stat: {i}")
+
+        global_region_locations = get_location_names_with_ids(temp_locations)
+        global_region.add_locations(global_region_locations)
 
     #Jobs
     temp_locations = []
