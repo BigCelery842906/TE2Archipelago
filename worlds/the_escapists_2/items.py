@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
 from Options import OptionError
+from ..earthbound.modules.enemizer.randomize_enemy_attacks import needs_argument
 
 if TYPE_CHECKING:
     from .world import TheEscapists2World
@@ -89,7 +90,7 @@ ITEM_NAME_TO_ID = {
     "Comb": 251,
     "Toothpaste": 252,
     "Toothbrush": 253,
-    "Roll of Toilet Paper": 254,
+    "Roll Of Toilet Paper": 254,
     "Soil": 255,
     "Sock": 256,
     "Magazine": 257,
@@ -97,7 +98,7 @@ ITEM_NAME_TO_ID = {
 
     "Foil": 260,
 
-    "Pair of Rubber Gloves": 262,
+    "Pair Of Rubber Gloves": 262,
 
     "Nail Polish": 264,
     "Mug": 265,
@@ -105,13 +106,13 @@ ITEM_NAME_TO_ID = {
     "Plastic Fork": 267,
     "Plastic Knife": 268,
     "Tea Bag": 269,
-    "Lump of Sugar": 270,
-    "Bottle of Milk": 271,
+    "Lump Of Sugar": 270,
+    "Bottle Of Milk": 271,
     "Cookie": 272,
 
 
     "Fine Art Brush": 275,
-    "Tube of Art Paints": 276,
+    "Tube Of Art Paints": 276,
     "Bed Sheet": 277,
     "Pillow": 278,
     "Pillow Case": 279,
@@ -208,24 +209,24 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Comb": ItemClassification.filler,
     "Toothpaste": ItemClassification.filler,
     "Toothbrush": ItemClassification.filler,
-    "Roll of Toilet Paper": ItemClassification.filler,
+    "Roll Of Toilet Paper": ItemClassification.filler,
     "Soil": ItemClassification.filler,
     "Sock": ItemClassification.filler,
     "Magazine": ItemClassification.filler,
     "Book": ItemClassification.filler,
     "Foil": ItemClassification.filler,
-    "Pair of Rubber Gloves": ItemClassification.filler,
+    "Pair Of Rubber Gloves": ItemClassification.filler,
     "Nail Polish": ItemClassification.filler,
     "Mug": ItemClassification.filler,
     "Plastic Spoon": ItemClassification.filler,
     "Plastic Fork": ItemClassification.filler,
     "Plastic Knife": ItemClassification.filler,
     "Tea Bag": ItemClassification.filler,
-    "Lump of Sugar": ItemClassification.filler,
-    "Bottle of Milk": ItemClassification.filler,
+    "Lump Of Sugar": ItemClassification.filler,
+    "Bottle Of Milk": ItemClassification.filler,
     "Cookie": ItemClassification.filler,
     "Fine Art Brush": ItemClassification.filler,
-    "Tube of Art Paints": ItemClassification.filler,
+    "Tube Of Art Paints": ItemClassification.filler,
     "Bed Sheet": ItemClassification.filler,
     "Pillow": ItemClassification.filler,
     "Pillow Case": ItemClassification.filler,
@@ -269,44 +270,60 @@ def create_all_items(world: TheEscapists2World) -> None:
     validPrisonUnlocks = []
     need_red_key = False
     need_cyan_key = False
+    need_guard_outfit = False
 
     generate_Stats = False
 
     if world.options.center_perks:
         validPrisonUnlocks.append("Center Perks 2.0 Prison Unlock")
         itempool.append(world.create_item("Blueprint: Fake Audio Equipment"))
+        need_guard_outfit = True
+        need_red_key = True
+        need_cyan_key = True
 
     if world.options.rattlesnake_springs:
         validPrisonUnlocks.append("Rattlesnake Springs Prison Unlock")
         itempool.append(world.create_item("Blueprint: Complete Crossbow"))
         need_red_key = True
+        need_cyan_key = True
 
     if world.options.kapow_camp:
         validPrisonUnlocks.append("K.A.P.O.W Camp Prison Unlock")
         itempool.append(world.create_item("Blueprint: Makeshift Rocket Thruster"))
         itempool.append(world.create_item("Blueprint: Makeshift Ladder"))
+        need_guard_outfit = True
+        need_red_key = True
+        need_cyan_key = True
+
 
     if world.options.hmp_offshore:
         validPrisonUnlocks.append("H.M.P. Offshore Prison Unlock")
         itempool.append(world.create_item("Blueprint: Fishing Rod"))
         itempool.append(world.create_item("Blueprint: Breathable Trash Bag"))
+        need_guard_outfit = True
         need_red_key = True
+        need_cyan_key = True
 
     if world.options.fort_tundra:
         validPrisonUnlocks.append("Fort Tundra Prison Unlock")
         itempool.append(world.create_item("Blueprint: Bed Dummy"))
-        itempool.append(world.create_item("Blueprint: Guard Outfit"))
+        need_guard_outfit = True
+        need_red_key = True
+        need_cyan_key = True
 
     if world.options.area_17:
         validPrisonUnlocks.append("Area 17 Prison Unlock")
         itempool.append(world.create_item("Blueprint: Security Pass"))
+        need_guard_outfit = True
         need_red_key = True
         need_cyan_key = True
 
     if world.options.uss_anomaly:
         validPrisonUnlocks.append("U.S.S. Anomaly Prison Unlock")
         #Contraband Pouch required but should be in pool regardless - Hence being sat just outside this loop
+        need_guard_outfit = True
         need_red_key = True
+        need_cyan_key = True
 
     itempool.append(world.create_item("Blueprint: Contraband Pouch"))
 
@@ -368,6 +385,9 @@ def create_all_items(world: TheEscapists2World) -> None:
     if need_cyan_key:
         itempool.append(world.create_item("Blueprint: Plastic Cyan Key"))
         itempool.append(world.create_item("Blueprint: Key Mould Cyan"))
+
+    if need_guard_outfit:
+        itempool.append(world.create_item("Blueprint: Guard Outfit"))
 
     for item in usefulItems:
         itempool.append(world.create_item(item))

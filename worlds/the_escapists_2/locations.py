@@ -315,22 +315,49 @@ LOCATION_NAME_TO_ID: Dict[str, int] = {
     "Escape: Passport To Freedom (Air Force Con)" : BASE_LOCATION_ID + 10000 + 100 + 1,
     "Escape: Plane Crazy (Air Force Con)" : BASE_LOCATION_ID + 10000 + 100 + 2,
 
+    #Desks for each prison (Where not called the same)
+    #CP2.0
+    "Center Perks 2.0 Contraband Desk" : BASE_LOCATION_ID + 1000 + 35,
+    "Center Perks 2.0 Cutlery Tray" : BASE_LOCATION_ID + 1000 + 36,
+
+    #RSS
+    "Rattlesnake Springs Contraband Desk" : BASE_LOCATION_ID + 2000 + 36,
+    "Rattlesnake Springs Cutlery Tray" : BASE_LOCATION_ID + 2000 + 37,
+
+    #KAPOW
+    "K.A.P.O.W Camp Contraband Desk" : BASE_LOCATION_ID + 3000 + 25,
+    "K.A.P.O.W Camp Cutlery Tray" : BASE_LOCATION_ID + 3000 + 26,
+
+    #HMPOff
+    "H.M.P. Offshore Contraband Desk" : BASE_LOCATION_ID + 4000 + 28,
+    "H.M.P. Offshore Cutlery Tray" : BASE_LOCATION_ID + 4000 + 29,
+
+    #FT
+    "Fort Tundra Contraband Desk" : BASE_LOCATION_ID + 5000 + 34,
+    "Fort Tundra Cutlery Tray" : BASE_LOCATION_ID + 5000 + 35,
+
+    #A17
+    "Area 17 Contraband Desk" : BASE_LOCATION_ID + 6000 + 28,
+    "Area 17 Cutlery Tray" : BASE_LOCATION_ID + 6000 + 29,
+
+    #USSA
+    "U.S.S. Anomaly Contraband Desk" : BASE_LOCATION_ID + 7000 + 27,
+    "U.S.S. Anomaly Cutlery Tray" : BASE_LOCATION_ID + 7000 + 28,
 }
 
 # --- DESKS FOR EACH PRISON
 
-for i in range (1, 37): LOCATION_NAME_TO_ID[f"Center Perks 2.0 Desk {i}"] = BASE_LOCATION_ID + 1000 + i
-for i in range(1, 39): LOCATION_NAME_TO_ID[f"Rattlesnake Springs Desk {i}"] = BASE_LOCATION_ID + 2000 + i
-for i in range(1, 28): LOCATION_NAME_TO_ID[f"K.A.P.O.W Camp Desk {i}"] = BASE_LOCATION_ID + 3000 + i
-for i in range(1, 35): LOCATION_NAME_TO_ID[f"H.M.P. Offshore Desk {i}"] = BASE_LOCATION_ID + 4000 + i
-for i in range(1, 37): LOCATION_NAME_TO_ID[f"Fort Tundra Desk {i}"] = BASE_LOCATION_ID + 5000 + i
-for i in range(1, 34): LOCATION_NAME_TO_ID[f"Area 17 Desk {i}"] = BASE_LOCATION_ID + 6000 + i
-for i in range(1, 29): LOCATION_NAME_TO_ID[f"U.S.S. Anomaly Desk {i}"] = BASE_LOCATION_ID + 7000 + i
+for i in range (1, 35): LOCATION_NAME_TO_ID[f"Center Perks 2.0 Desk {i}"] = BASE_LOCATION_ID + 1000 + i
+for i in range(1, 36): LOCATION_NAME_TO_ID[f"Rattlesnake Springs Desk {i}"] = BASE_LOCATION_ID + 2000 + i
+for i in range(1, 25): LOCATION_NAME_TO_ID[f"K.A.P.O.W Camp Desk {i}"] = BASE_LOCATION_ID + 3000 + i
+for i in range(1, 28): LOCATION_NAME_TO_ID[f"H.M.P. Offshore Desk {i}"] = BASE_LOCATION_ID + 4000 + i
+for i in range(1, 34): LOCATION_NAME_TO_ID[f"Fort Tundra Desk {i}"] = BASE_LOCATION_ID + 5000 + i
+for i in range(1, 28): LOCATION_NAME_TO_ID[f"Area 17 Desk {i}"] = BASE_LOCATION_ID + 6000 + i
+for i in range(1, 27): LOCATION_NAME_TO_ID[f"U.S.S. Anomaly Desk {i}"] = BASE_LOCATION_ID + 7000 + i
 
-#TODO: Cougar Creek Railroad to double check desk count
-for i in range(1, 8): LOCATION_NAME_TO_ID[f"Cougar Creek Railroad Desk {i}"] = BASE_LOCATION_ID + 8000 + i
-for i in range(1, 16): LOCATION_NAME_TO_ID[f"H.M.S. Orca Desk {i}"] = BASE_LOCATION_ID + 9000 + i
-for i in range(1, 13): LOCATION_NAME_TO_ID[f"Air Force Con Desk {i}"] = BASE_LOCATION_ID + 10000 + i
+for i in range(1, 9): LOCATION_NAME_TO_ID[f"Cougar Creek Railroad Desk {i}"] = BASE_LOCATION_ID + 8000 + i
+for i in range(1, 15): LOCATION_NAME_TO_ID[f"H.M.S. Orca Desk {i}"] = BASE_LOCATION_ID + 9000 + i
+for i in range(1, 12): LOCATION_NAME_TO_ID[f"Air Force Con Desk {i}"] = BASE_LOCATION_ID + 10000 + i
 
 class TheEscapists2Location(Location):
     game = "The Escapists 2"
@@ -415,70 +442,84 @@ def create_regular_locations(world: TheEscapists2World) -> None:
     if world.options.center_perks:
         center_perks = world.get_region("Center Perks")
         temp_locations = ["Escape: Perimeter Breakout (Center Perks 2.0)", "Escape: Meet the Crew (Center Perks 2.0)"]
-        for i in range (1, 37): temp_locations.append(f"Center Perks 2.0 Desk {i}")
+        for i in range (1, 35): temp_locations.append(f"Center Perks 2.0 Desk {i}")
+        temp_locations.append("Center Perks 2.0 Contraband Desk")
+        temp_locations.append("Center Perks 2.0 Cutlery Tray")
         center_perks_locations = get_location_names_with_ids(temp_locations)
         center_perks.add_locations(center_perks_locations, TheEscapists2Location)
 
     if world.options.rattlesnake_springs:
         rattlesnake_springs = world.get_region("Rattlesnake Springs")
         temp_locations = ["Escape: Perimeter Breakout (Rattlesnake Springs)","Escape: Zip It Up (Rattlesnake Springs)"]
-        for i in range (1, 39): temp_locations.append(f"Rattlesnake Springs Desk {i}")
+        for i in range (1, 36): temp_locations.append(f"Rattlesnake Springs Desk {i}")
+        temp_locations.append("Rattlesnake Springs Contraband Desk")
+        temp_locations.append("Rattlesnake Springs Cutlery Tray")
         rattlesnake_springs_locations = get_location_names_with_ids(temp_locations)
         rattlesnake_springs.add_locations(rattlesnake_springs_locations, TheEscapists2Location)
 
     if world.options.kapow_camp:
         kapow_camp = world.get_region("KAPOW Camp")
         temp_locations = [ "Escape: Perimeter Breakout (K.A.P.O.W Camp)", "Escape: Speed McQueen (K.A.P.O.W Camp)"]
-        for i in range (1, 28): temp_locations.append(f"K.A.P.O.W Camp Desk {i}")
+        for i in range (1, 25): temp_locations.append(f"K.A.P.O.W Camp Desk {i}")
+        temp_locations.append("K.A.P.O.W Camp Contraband Desk")
+        temp_locations.append("K.A.P.O.W Camp Cutlery Tray")
         kapow_camp_locations = get_location_names_with_ids(temp_locations)
         kapow_camp.add_locations(kapow_camp_locations, TheEscapists2Location)
 
     if world.options.hmp_offshore:
         hmp_offshore = world.get_region("HMP Offshore")
         temp_locations = ["Escape: Perimeter Breakout (H.M.P. Offshore)", "Escape: Swimming With Dolphins  (H.M.P. Offshore)", "Escape: Trash Talk  (H.M.P. Offshore)"]
-        for i in range (1, 35): temp_locations.append(f"H.M.P. Offshore Desk {i}")
+        for i in range (1, 28): temp_locations.append(f"H.M.P. Offshore Desk {i}")
+        temp_locations.append("H.M.P. Offshore Contraband Desk")
+        temp_locations.append("H.M.P. Offshore Cutlery Tray")
         hmp_offshore_locations = get_location_names_with_ids(temp_locations)
         hmp_offshore.add_locations(hmp_offshore_locations, TheEscapists2Location)
 
     if world.options.fort_tundra:
         fort_tundra = world.get_region("Fort Tundra")
         temp_locations = ["Escape: Perimeter Breakout (Fort Tundra)", "Escape: Rock-hammer Hard Place (Fort Tundra)"]
-        for i in range (1, 37): temp_locations.append(f"Fort Tundra Desk {i}")
+        for i in range (1, 34): temp_locations.append(f"Fort Tundra Desk {i}")
+        temp_locations.append("Fort Tundra Contraband Desk")
+        temp_locations.append("Fort Tundra Cutlery Tray")
         fort_tundra_locations = get_location_names_with_ids(temp_locations)
         fort_tundra.add_locations(fort_tundra_locations, TheEscapists2Location)
 
     if world.options.area_17:
         area_17 = world.get_region("Area 17")
         temp_locations = ["Escape: Perimeter Breakout (Area 17)", "Escape: I'm Only Human (Area 17)"]
-        for i in range (1, 34): temp_locations.append(f"Area 17 Desk {i}")
+        for i in range (1, 28): temp_locations.append(f"Area 17 Desk {i}")
+        temp_locations.append("Area 17 Contraband Desk")
+        temp_locations.append("Area 17 Cutlery Tray")
         area_17_locations = get_location_names_with_ids(temp_locations)
         area_17.add_locations(area_17_locations, TheEscapists2Location)
 
     if world.options.uss_anomaly:
         uss_anomaly = world.get_region("USS Anomaly")
         temp_locations = ["Escape: Perimeter Breakout (U.S.S. Anomaly)", "Escape: Race From Space (U.S.S. Anomaly)"]
-        for i in range (1, 29): temp_locations.append(f"U.S.S. Anomaly Desk {i}")
+        for i in range (1, 27): temp_locations.append(f"U.S.S. Anomaly Desk {i}")
+        temp_locations.append("U.S.S. Anomaly Contraband Desk")
+        temp_locations.append("U.S.S. Anomaly Cutlery Tray")
         uss_anomaly_locations = get_location_names_with_ids(temp_locations)
         uss_anomaly.add_locations(uss_anomaly_locations, TheEscapists2Location)
 
     if world.options.cougar_creek_railroad:
         cougar_creek = world.get_region("Cougar Creek")
         temp_locations = ["Escape: My Little Phoney (Cougar Creek Railroad)", "Escape: Hooked On You (Cougar Creek Railroad)"]
-        for i in range (1,8): temp_locations.append(f"Cougar Creek Railroad Desk {i}")
+        for i in range (1,9): temp_locations.append(f"Cougar Creek Railroad Desk {i}")
         cougar_creek_locations = get_location_names_with_ids(temp_locations)
         cougar_creek.add_locations(cougar_creek_locations, TheEscapists2Location)
 
     if world.options.hms_orca:
         hms_orca = world.get_region("HMS Orca")
         temp_locations = ["Escape: Scuba Doo (H.M.S. Orca)", "Escape: Wave Goodbye (H.M.S. Orca)"]
-        for i in range (1, 16): temp_locations.append(f"H.M.S. Orca Desk {i}")
+        for i in range (1, 15): temp_locations.append(f"H.M.S. Orca Desk {i}")
         hms_orca_locations = get_location_names_with_ids(temp_locations)
         hms_orca.add_locations(hms_orca_locations, TheEscapists2Location)
 
     if world.options.air_force_con:
         air_force_con = world.get_region("Air Force Con")
         temp_locations = ["Escape: Passport To Freedom (Air Force Con)", "Escape: Plane Crazy (Air Force Con)"]
-        for i in range (1, 13): temp_locations.append(f"Air Force Con Desk {i}")
+        for i in range (1, 12): temp_locations.append(f"Air Force Con Desk {i}")
         air_force_con_locations = get_location_names_with_ids(temp_locations)
         air_force_con.add_locations(air_force_con_locations, TheEscapists2Location)
 
