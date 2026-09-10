@@ -29,22 +29,19 @@ AFC_Unlock = "Air Force Con Prison Unlock"
 
 def can_do_perimeter_breakout(world: TheEscapists2World) -> Has:
     items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
-    items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
-    items_for_60_intellect = get_items_required_for_stat_value(world, "Intellect", 60)
-    items_for_70_intellect = get_items_required_for_stat_value(world, "Intellect", 70)
 
-    CAN_DO_CHIP = (Has("Blueprint: Flimsy Pickaxe") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Flimsy Shovel") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Lightweight Pickaxe") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Lightweight Shovel") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Sturdy Pickaxe") & Has("Progressive Intellect", items_for_60_intellect)) | (Has( "Blueprint: Sturdy Shovel") & Has("Progressive Intellect", items_for_60_intellect)) | (Has( "Blueprint: Multitool") & Has("Progressive Intellect", items_for_70_intellect))
-    CAN_DO_CUT = (Has("Blueprint: Flimsy Cutters") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Lightweight Cutters") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Sturdy Cutters") & Has("Progressive Intellect", items_for_60_intellect))
-    CAN_DO_DIG = (Has("Blueprint: Flimsy Shovel") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Flimsy Pickaxe") & Has("Progressive Intellect", items_for_40_intellect)) | (Has( "Blueprint: Lightweight Shovel") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Lightweight Pickaxe") & Has("Progressive Intellect", items_for_50_intellect)) | (Has( "Blueprint: Sturdy Shovel") & Has("Progressive Intellect", items_for_60_intellect)) | (Has( "Blueprint: Sturdy Pickaxe") & Has("Progressive Intellect", items_for_60_intellect)) | (Has( "Blueprint: Multitool") & Has("Progressive Intellect", items_for_70_intellect))
+    CAN_DO_CHIP = (Has("Blueprint: Flimsy Pickaxe") & Has("Progressive Intellect", items_for_40_intellect) & Has("Blueprint: Tool Handle"))
+    CAN_DO_CUT = can_do_cut(world)
+    CAN_DO_DIG = (Has("Blueprint: Flimsy Shovel") & Has("Progressive Intellect", items_for_40_intellect) & Has("Blueprint: Tool Handle"))
+
+    #You also need the tool handle for this btw (For shovel and pickaxe
     can_do_perimeter = CAN_DO_CHIP | CAN_DO_CUT | CAN_DO_DIG
     return can_do_perimeter
 
 def can_do_cut(world: TheEscapists2World) -> Has:
     items_for_40_intellect = get_items_required_for_stat_value(world, "Intellect", 40)
-    items_for_50_intellect = get_items_required_for_stat_value(world, "Intellect", 50)
-    items_for_60_intellect = get_items_required_for_stat_value(world, "Intellect", 60)
 
-    CAN_DO_CUT = (Has("Blueprint: Flimsy Cutters") & Has("Progressive Intellect", items_for_40_intellect)) | (Has("Blueprint: Lightweight Cutters") & Has("Progressive Intellect", items_for_50_intellect)) | (Has("Blueprint: Sturdy Cutters") & Has("Progressive Intellect", items_for_60_intellect))
+    CAN_DO_CUT = (Has("Blueprint: Flimsy Cutters") & Has("Progressive Intellect", items_for_40_intellect))
     return CAN_DO_CUT
 
 def has_guard_outfit(world: TheEscapists2World) -> Has:

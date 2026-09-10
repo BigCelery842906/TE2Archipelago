@@ -3,7 +3,6 @@ from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
 from Options import OptionError
-from ..earthbound.modules.enemizer.randomize_enemy_attacks import needs_argument
 
 if TYPE_CHECKING:
     from .world import TheEscapists2World
@@ -171,6 +170,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
 
     # --- TOOL BLUEPRINTS
     "Blueprint: Multitool": ItemClassification.progression,
+    "Blueprint: Tool Handle": ItemClassification.progression,
     "Blueprint: Flimsy Pickaxe": ItemClassification.progression,
     "Blueprint: Lightweight Pickaxe": ItemClassification.progression,
     "Blueprint: Sturdy Pickaxe": ItemClassification.progression,
@@ -182,7 +182,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
 
     # --- USEFUL ITEMS
 
-    "Blueprint: Tool Handle": ItemClassification.useful,
+
 
     "Blueprint: Durable Contraband Pouch": ItemClassification.useful,
     "Blueprint: Fake Wall Block": ItemClassification.useful,
@@ -237,7 +237,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
 fillerItems = []
 trapItems = []
 usefulItems = []
-perimeter_escape_items = ["Blueprint: Multitool", "Blueprint: Flimsy Pickaxe", "Blueprint: Lightweight Pickaxe", "Blueprint: Sturdy Pickaxe", "Blueprint: Flimsy Cutters", "Blueprint: Sturdy Cutters", "Blueprint: Flimsy Shovel", "Blueprint: Lightweight Shovel", "Blueprint: Sturdy Shovel",]
+perimeter_escape_items = ["Blueprint: Multitool", "Blueprint: Flimsy Pickaxe", "Blueprint: Lightweight Pickaxe", "Blueprint: Sturdy Pickaxe", "Blueprint: Flimsy Cutters", "Blueprint: Sturdy Cutters", "Blueprint: Flimsy Shovel", "Blueprint: Lightweight Shovel", "Blueprint: Sturdy Shovel", "Blueprint: Tool Handle",]
 for item in DEFAULT_ITEM_CLASSIFICATIONS:
     if DEFAULT_ITEM_CLASSIFICATIONS[item] == ItemClassification.filler:
         fillerItems.append(item)
