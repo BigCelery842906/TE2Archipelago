@@ -273,6 +273,7 @@ def create_all_items(world: TheEscapists2World) -> None:
     need_guard_outfit = False
 
     generate_Stats = False
+    generate_Intellect = False
 
     if world.options.center_perks:
         validPrisonUnlocks.append("Center Perks 2.0 Prison Unlock")
@@ -338,6 +339,7 @@ def create_all_items(world: TheEscapists2World) -> None:
         itempool.append(world.create_item("Blueprint: Grappling Hook"))
 
     if world.options.hms_orca:
+        generate_Intellect = True
         validPrisonUnlocks.append("H.M.S. Orca Prison Unlock")
         itempool.append(world.create_item("Blueprint: Makeshift Breathing Apparatus"))
 
@@ -359,6 +361,7 @@ def create_all_items(world: TheEscapists2World) -> None:
 
     # Stats
     if generate_Stats:
+        generate_Intellect = True
         increment = world.options.strength_step
         if world.options.strength_step != 0:
             for i in range(30, 100, increment):
@@ -368,14 +371,16 @@ def create_all_items(world: TheEscapists2World) -> None:
         if world.options.stamina_step != 0:
             for i in range(30, 100, increment):
                 itempool.append(world.create_item("Progressive Stamina"))
+    else:
+        world.options.strength_step.value = 0
+        world.options.stamina_step.value = 0
 
+    if generate_Intellect:
         increment = world.options.intellect_step
         if world.options.intellect_step != 0:
             for i in range(30, 100, increment):
                 itempool.append(world.create_item("Progressive Intellect"))
     else:
-        world.options.strength_step.value = 0
-        world.options.stamina_step.value = 0
         world.options.intellect_step.value = 0
 
     if need_red_key:

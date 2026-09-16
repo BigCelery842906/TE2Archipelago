@@ -391,6 +391,12 @@ def create_regular_locations(world: TheEscapists2World) -> None:
             for i in range(30, 100, increment):
                 temp_locations.append(f"Stamina Stat: {i}")
 
+        global_region_locations = get_location_names_with_ids(temp_locations)
+        global_region.add_locations(global_region_locations)
+
+    if options.center_perks or options.rattlesnake_springs or options.kapow_camp or options.hmp_offshore or options.fort_tundra or options.area_17 or options.uss_anomaly or options.hms_orca:
+        temp_locations = []
+
         increment = world.options.intellect_step
         if increment != 0:
             temp_locations.append("Intellect Stat: Max")
