@@ -33,6 +33,8 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Contraband Pouch": 39,
     "Blueprint: Makeshift Breathing Apparatus": 54,
     "Blueprint: Energy Module": 55,
+    "Blueprint: Plastic Green Key": 56,
+    "Blueprint: Key Mould Green": 57,
 
     # --- PRISON UNLOCKS
     "Center Perks 2.0 Prison Unlock": 19,
@@ -150,6 +152,8 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Contraband Pouch": ItemClassification.progression,
     "Blueprint: Makeshift Breathing Apparatus": ItemClassification.progression,
     "Blueprint: Energy Module": ItemClassification.progression,
+    "Blueprint: Plastic Green Key": ItemClassification.progression,
+    "Blueprint: Key Mould Green": ItemClassification.progression,
 
     # --- PRISON UNLOCKS
     "Center Perks 2.0 Prison Unlock": ItemClassification.progression,
@@ -270,6 +274,7 @@ def create_all_items(world: TheEscapists2World) -> None:
     validPrisonUnlocks = []
     need_red_key = False
     need_cyan_key = False
+    need_green_key = False
     need_guard_outfit = False
 
     generate_Stats = False
@@ -311,6 +316,7 @@ def create_all_items(world: TheEscapists2World) -> None:
         need_guard_outfit = True
         need_red_key = True
         need_cyan_key = True
+        need_green_key = True
 
     if world.options.area_17:
         validPrisonUnlocks.append("Area 17 Prison Unlock")
@@ -390,6 +396,10 @@ def create_all_items(world: TheEscapists2World) -> None:
     if need_cyan_key:
         itempool.append(world.create_item("Blueprint: Plastic Cyan Key"))
         itempool.append(world.create_item("Blueprint: Key Mould Cyan"))
+
+    if need_green_key:
+        itempool.append(world.create_item("Blueprint: Plastic Green Key"))
+        itempool.append(world.create_item("Blueprint: Key Mould Green"))
 
     if need_guard_outfit:
         itempool.append(world.create_item("Blueprint: Guard Outfit"))
