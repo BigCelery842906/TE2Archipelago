@@ -2,59 +2,60 @@ from dataclasses import dataclass
 from Options import Toggle, PerGameCommonOptions, Range
 
 
+class DeathLink(Toggle):
+    """Enable DeathLink"""
+    display_name = "DeathLink"
+    default = 1
+
+class StealthLink(Toggle):
+    """Enable StealthLink (Prison Lockdowns trigger in other prisons and vice versa)"""
+    display_name = "StealthLink"
+    default = 1
+
 class CenterPerks(Toggle):
     """Enable Center Perks 2.0 in the item pool"""
     display_name = "Center Perks 2.0"
     default = 1
-
 
 class CougarCreek(Toggle):
     """Enable Cougar Creek Railroad in the item pool"""
     display_name = "Cougar Creek Railroad"
     default = 1
 
-
 class RattlesnakeSprings(Toggle):
     """Enable Rattlesnake Springs in the item pool"""
     display_name = "Rattlesnake Springs"
     default = 0
-
 
 class KAPOWCamp(Toggle):
     """Enable K.A.P.O.W Camp in the item pool"""
     display_name = "K.A.P.O.W Camp"
     default = 0
 
-
 class HMSOrca(Toggle):
     """Enable H.M.S. Orca in the item pool"""
     display_name = "H.M.S. Orca"
     default = 0
-
 
 class HMPOffshore(Toggle):
     """Enable H.M.P. Offshore in the item pool"""
     display_name = "H.M.P. Offshore"
     default = 0
 
-
 class FortTundra(Toggle):
     """Enable Fort Tundra in the item pool"""
     display_name = "Fort Tundra"
     default = 0
-
 
 class Area17(Toggle):
     """Enable Area 17 in the item pool"""
     display_name = "Area 17"
     default = 0
 
-
 class AirForceCon(Toggle):
     """Enable Air Force Con in the item pool"""
     display_name = "Air Force Con"
     default = 0
-
 
 class USSAnomaly(Toggle):
     """Enable U.S.S. Anomaly in the item pool"""
@@ -105,6 +106,8 @@ class UniqueEscapesRequired(Range):
 
 @dataclass
 class TheEscapists2Options(PerGameCommonOptions):
+    deathlink: DeathLink
+    stealthlink: StealthLink
     center_perks: CenterPerks
     cougar_creek_railroad: CougarCreek
     rattlesnake_springs: RattlesnakeSprings
