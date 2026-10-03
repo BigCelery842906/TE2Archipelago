@@ -259,7 +259,7 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
 
         world.set_rule(world.get_location("Area 17 Desk 13"), has_infirmary_outfit(world))
         world.set_rule(world.get_location("Area 17 Desk 14"), has_cyan_key(world))
-        world.set_rule(world.get_location("Area 17 Desk 15"), (has_red_key(world) | has_infirmary_outfit(world)))
+        world.set_rule(world.get_location("Area 17 Desk 15"), has_red_key(world))
         world.set_rule(world.get_location("Area 17 Desk 16"), has_red_key(world))
         world.set_rule(world.get_location("Area 17 Desk 17"), (has_red_key(world) | has_infirmary_outfit(world)))
         world.set_rule(world.get_location("Area 17 Desk 18"), has_red_key(world))
