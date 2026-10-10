@@ -75,6 +75,12 @@ def has_green_key(world: TheEscapists2World) -> Has:
     has_green = Has("Progressive Intellect", items_for_60_intellect) & Has("Blueprint: Plastic Green Key") & Has("Blueprint: Key Mould Green")
     return has_green
 
+def has_contraband_pouch(world: TheEscapists2World) -> Has:
+    items_for_70_intellect = get_items_required_for_stat_value(world, "Intellect", 70)
+
+    has_contraband_pouch = Has("Progressive Intellect", items_for_70_intellect) & Has("Blueprint: Contraband Pouch")
+    return has_contraband_pouch
+
 #TODO: CHECK IF REQUIRED BEFORE RELEASE
 def get_current_stat_value(world: TheEscapists2World, state: CollectionState, stat_to_check) -> None:
     if stat_to_check == "Strength":
@@ -94,7 +100,7 @@ def get_current_stat_value(world: TheEscapists2World, state: CollectionState, st
     current_stat_value = 30 + (num_of_progressives_received * option_step)
 
     if current_stat_value > 100:
-        return 100
+        current_stat_value = 100
 
     else:
         return current_stat_value
@@ -155,10 +161,11 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(world.get_location("Escape: Zip It Up (Rattlesnake Springs)"), Has("Blueprint: Complete Crossbow") & has_red_key(world) & Has("Progressive Intellect", items_for_70_intellect))
         world.set_rule(world.get_location("RSS ZIU"), Has("Blueprint: Complete Crossbow") & has_cyan_key(world) & Has("Progressive Intellect", items_for_70_intellect))
 
-        world.set_rule(world.get_location("Rattlesnake Springs Desk 23"), has_infirmary_outfit(world))
+        world.set_rule(world.get_location("Rattlesnake Springs Desk 22"), has_infirmary_outfit(world))
+        world.set_rule(world.get_location("Rattlesnake Springs Desk 23"), has_cyan_key(world))
         world.set_rule(world.get_location("Rattlesnake Springs Desk 24"), has_cyan_key(world))
-        world.set_rule(world.get_location("Rattlesnake Springs Desk 25"), has_cyan_key(world))
 
+        world.set_rule(world.get_location("Rattlesnake Springs Desk 25"), has_red_key(world))
         world.set_rule(world.get_location("Rattlesnake Springs Desk 26"), has_red_key(world))
         world.set_rule(world.get_location("Rattlesnake Springs Desk 27"), has_red_key(world))
         world.set_rule(world.get_location("Rattlesnake Springs Desk 28"), has_red_key(world))
@@ -168,7 +175,6 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(world.get_location("Rattlesnake Springs Desk 32"), has_red_key(world))
         world.set_rule(world.get_location("Rattlesnake Springs Desk 33"), has_red_key(world))
         world.set_rule(world.get_location("Rattlesnake Springs Desk 34"), has_red_key(world))
-        world.set_rule(world.get_location("Rattlesnake Springs Desk 35"), has_red_key(world))
         world.set_rule(world.get_location("Rattlesnake Springs Contraband Desk"), has_red_key(world))
 
     if world.options.kapow_camp:
@@ -238,12 +244,12 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
 
         world.set_rule(world.get_location("Fort Tundra Desk 27"), has_infirmary_outfit(world))
         world.set_rule(world.get_location("Fort Tundra Desk 28"), has_cyan_key(world))
-        world.set_rule(world.get_location("Fort Tundra Desk 29"), has_red_key(world))
-        world.set_rule(world.get_location("Fort Tundra Desk 30"), has_red_key(world))
-        world.set_rule(world.get_location("Fort Tundra Desk 31"), has_red_key(world))
-        world.set_rule(world.get_location("Fort Tundra Desk 32"), has_red_key(world))
-        world.set_rule(world.get_location("Fort Tundra Desk 33"), has_red_key(world))
-        world.set_rule(world.get_location("Fort Tundra Contraband Desk"), has_red_key(world) & has_guard_outfit(world))
+        world.set_rule(world.get_location("Fort Tundra Desk 29"), has_red_key(world) & has_contraband_pouch(world))
+        world.set_rule(world.get_location("Fort Tundra Desk 30"), has_red_key(world) & has_contraband_pouch(world))
+        world.set_rule(world.get_location("Fort Tundra Desk 31"), has_red_key(world) & has_contraband_pouch(world))
+        world.set_rule(world.get_location("Fort Tundra Desk 32"), has_red_key(world) & has_contraband_pouch(world))
+        world.set_rule(world.get_location("Fort Tundra Desk 33"), has_red_key(world) & has_contraband_pouch(world))
+        world.set_rule(world.get_location("Fort Tundra Contraband Desk"), has_red_key(world) & has_guard_outfit(world) & has_contraband_pouch(world))
 
     if world.options.area_17:
         to_area_17 = world.get_entrance("Menu to Area 17")
@@ -262,7 +268,7 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(world.get_location("Area 17 Desk 15"), has_red_key(world))
         world.set_rule(world.get_location("Area 17 Desk 16"), has_red_key(world))
         world.set_rule(world.get_location("Area 17 Desk 17"), (has_red_key(world) | has_infirmary_outfit(world)))
-        world.set_rule(world.get_location("Area 17 Desk 18"), has_red_key(world))
+        world.set_rule(world.get_location("Area 17 Desk 18"), has_red_key(world) | has_cyan_key(world))
         world.set_rule(world.get_location("Area 17 Desk 19"), (has_red_key(world) | has_infirmary_outfit(world)))
         world.set_rule(world.get_location("Area 17 Desk 20"), (has_red_key(world) | has_infirmary_outfit(world)))
         world.set_rule(world.get_location("Area 17 Desk 21"), has_red_key(world))
