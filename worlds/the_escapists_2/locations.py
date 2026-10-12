@@ -348,7 +348,7 @@ LOCATION_NAME_TO_ID: Dict[str, int] = {
 # --- DESKS FOR EACH PRISON
 
 for i in range (1, 35): LOCATION_NAME_TO_ID[f"Center Perks 2.0 Desk {i}"] = BASE_LOCATION_ID + 1000 + i
-for i in range(1, 36): LOCATION_NAME_TO_ID[f"Rattlesnake Springs Desk {i}"] = BASE_LOCATION_ID + 2000 + i
+for i in range(1, 35): LOCATION_NAME_TO_ID[f"Rattlesnake Springs Desk {i}"] = BASE_LOCATION_ID + 2000 + i
 for i in range(1, 25): LOCATION_NAME_TO_ID[f"K.A.P.O.W Camp Desk {i}"] = BASE_LOCATION_ID + 3000 + i
 for i in range(1, 28): LOCATION_NAME_TO_ID[f"H.M.P. Offshore Desk {i}"] = BASE_LOCATION_ID + 4000 + i
 for i in range(1, 34): LOCATION_NAME_TO_ID[f"Fort Tundra Desk {i}"] = BASE_LOCATION_ID + 5000 + i
@@ -457,7 +457,7 @@ def create_regular_locations(world: TheEscapists2World) -> None:
     if world.options.rattlesnake_springs:
         rattlesnake_springs = world.get_region("Rattlesnake Springs")
         temp_locations = ["Escape: Perimeter Breakout (Rattlesnake Springs)","Escape: Zip It Up (Rattlesnake Springs)"]
-        for i in range (1, 36): temp_locations.append(f"Rattlesnake Springs Desk {i}")
+        for i in range (1, 35): temp_locations.append(f"Rattlesnake Springs Desk {i}")
         temp_locations.append("Rattlesnake Springs Contraband Desk")
         temp_locations.append("Rattlesnake Springs Cutlery Tray")
         rattlesnake_springs_locations = get_location_names_with_ids(temp_locations)
