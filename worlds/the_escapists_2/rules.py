@@ -295,6 +295,9 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(world.get_location("Escape: Race From Space (U.S.S. Anomaly)"), Has("Progressive Intellect", items_for_60_intellect) & Has("Blueprint: Contraband Pouch") & has_red_key(world))
         world.set_rule(world.get_location("USSA RFS"), Has("Progressive Intellect", items_for_60_intellect) & Has("Blueprint: Contraband Pouch") & has_red_key(world))
 
+        world.set_rule(world.get_location("U.S.S. Anomaly Desk 15"), has_red_key(world))
+        world.set_rule(world.get_location("U.S.S. Anomaly Desk 19"), has_red_key(world))
+        world.set_rule(world.get_location("U.S.S. Anomaly Desk 23"), has_red_key(world))
         world.set_rule(world.get_location("U.S.S. Anomaly Desk 24"), can_do_cut(world))
         world.set_rule(world.get_location("U.S.S. Anomaly Desk 25"), has_cyan_key(world))
         world.set_rule(world.get_location("U.S.S. Anomaly Desk 26"), has_cyan_key(world))
