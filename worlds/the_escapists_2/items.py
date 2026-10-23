@@ -60,6 +60,7 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Flimsy Shovel": 36,
     "Blueprint: Lightweight Shovel": 37,
     "Blueprint: Sturdy Shovel": 38,
+    "Blueprint: Super Whip": 47,
 
     "Blueprint: Durable Contraband Pouch": 40,
     "Blueprint: Fake Wall Block": 41,
@@ -68,7 +69,7 @@ ITEM_NAME_TO_ID = {
     "Blueprint: Timber Brace": 44,
     "Blueprint: Super Metal Baton": 45,
     "Blueprint: Super Knuckle Duster": 46,
-    "Blueprint: Super Whip": 47,
+
     "Blueprint: Makeshift Stungun": 48,
     #"Blueprint: Gun Maker Kit": 49, #NOT NEEDED UNTIL MULTIPLAYER
     #"Blueprint: Moulded Gun": 50, #NOT NEEDED UNTIL MULTIPLAYER
@@ -183,7 +184,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Flimsy Shovel": ItemClassification.progression,
     "Blueprint: Lightweight Shovel": ItemClassification.progression,
     "Blueprint: Sturdy Shovel": ItemClassification.progression,
-
+    "Blueprint: Super Whip": ItemClassification.progression,
     # --- USEFUL ITEMS
 
 
@@ -195,7 +196,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Timber Brace": ItemClassification.useful,
     "Blueprint: Super Metal Baton": ItemClassification.useful,
     "Blueprint: Super Knuckle Duster": ItemClassification.useful,
-    "Blueprint: Super Whip": ItemClassification.useful,
+
     "Blueprint: Makeshift Stungun": ItemClassification.useful,
     #"Blueprint: Gun Maker Kit": ItemClassification.useful,
     #"Blueprint: Moulded Gun": ItemClassification.useful,
@@ -313,6 +314,7 @@ def create_all_items(world: TheEscapists2World) -> None:
     if world.options.fort_tundra:
         validPrisonUnlocks.append("Fort Tundra Prison Unlock")
         itempool.append(world.create_item("Blueprint: Bed Dummy"))
+        itempool.append(world.create_item("Blueprint: Super Whip"))
         need_guard_outfit = True
         need_red_key = True
         need_cyan_key = True

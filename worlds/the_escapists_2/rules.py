@@ -239,8 +239,8 @@ def set_all_entrance_rules(world: TheEscapists2World) -> None:
         world.set_rule(world.get_location("FT PE"), green_key_method | red_key_method)
 
         items_for_70_intellect = get_items_required_for_stat_value(world, "Intellect", 70)
-        world.set_rule(world.get_location("Escape: Rock-hammer Hard Place (Fort Tundra)"), can_do_cut(world) & Has("Progressive Intellect", items_for_70_intellect))
-        world.set_rule(world.get_location("FT RHHP"), can_do_cut(world) & Has("Progressive Intellect", items_for_70_intellect)) #The Rock Hammer is acquired via a quest
+        world.set_rule(world.get_location("Escape: Rock-hammer Hard Place (Fort Tundra)"), can_do_cut(world) & Has("Progressive Intellect", items_for_70_intellect) & Has("Blueprint: Super Whip"))
+        world.set_rule(world.get_location("FT RHHP"), can_do_cut(world) & Has("Progressive Intellect", items_for_70_intellect)& Has("Blueprint: Super Whip")) #The Rock Hammer is acquired via a quest
 
         world.set_rule(world.get_location("Fort Tundra Desk 27"), has_infirmary_outfit(world))
         world.set_rule(world.get_location("Fort Tundra Desk 28"), has_cyan_key(world))
