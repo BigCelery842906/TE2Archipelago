@@ -149,7 +149,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Key Mould Cyan": ItemClassification.progression,
     "Blueprint: Makeshift Harness": ItemClassification.progression,
     "Blueprint: Parachute": ItemClassification.progression,
-    "Blueprint: Lightweight Cutters": ItemClassification.progression,
+
     "Blueprint: Contraband Pouch": ItemClassification.progression,
     "Blueprint: Makeshift Breathing Apparatus": ItemClassification.progression,
     "Blueprint: Energy Module": ItemClassification.progression,
@@ -180,6 +180,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Blueprint: Lightweight Pickaxe": ItemClassification.progression,
     "Blueprint: Sturdy Pickaxe": ItemClassification.progression,
     "Blueprint: Flimsy Cutters": ItemClassification.progression,
+    "Blueprint: Lightweight Cutters": ItemClassification.progression,
     "Blueprint: Sturdy Cutters": ItemClassification.progression,
     "Blueprint: Flimsy Shovel": ItemClassification.progression,
     "Blueprint: Lightweight Shovel": ItemClassification.progression,
@@ -242,7 +243,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
 fillerItems = []
 trapItems = []
 usefulItems = []
-perimeter_escape_items = ["Blueprint: Multitool", "Blueprint: Flimsy Pickaxe", "Blueprint: Lightweight Pickaxe", "Blueprint: Sturdy Pickaxe", "Blueprint: Flimsy Cutters", "Blueprint: Sturdy Cutters", "Blueprint: Flimsy Shovel", "Blueprint: Lightweight Shovel", "Blueprint: Sturdy Shovel", "Blueprint: Tool Handle",]
+perimeter_escape_items = ["Blueprint: Multitool", "Blueprint: Flimsy Pickaxe", "Blueprint: Lightweight Pickaxe", "Blueprint: Sturdy Pickaxe", "Blueprint: Flimsy Cutters", "Blueprint: Lightweight Cutters", "Blueprint: Sturdy Cutters", "Blueprint: Flimsy Shovel", "Blueprint: Lightweight Shovel", "Blueprint: Sturdy Shovel", "Blueprint: Tool Handle",]
 for item in DEFAULT_ITEM_CLASSIFICATIONS:
     if DEFAULT_ITEM_CLASSIFICATIONS[item] == ItemClassification.filler:
         fillerItems.append(item)
